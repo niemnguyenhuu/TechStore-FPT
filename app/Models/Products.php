@@ -11,7 +11,7 @@ class Products extends Model
     protected $table = 'products';
     protected $primary = 'id';
     protected $dates = ['date'];
-    public $timestamps = false;
+    public $timestamps = true;
     protected $attributes = [
         'image'=>'',
         'discount'=>0,

@@ -67,14 +67,16 @@
                   <h3>Duyệt qua danh mục</h3>
                 </div>
                 <div class="widgets_inner">
+                  <form action="" method="post">
                   <ul class="list" id="cate">
                     @foreach ($allCate as $cate)
-                    <li>
-                      <a href="{{route('getProByCate',$cate->id)}}">{{$cate->name}}</a>
+                    <li data-cateid="{{$cate->id}}">
+                      <a href="#" class="categories">{{$cate->name}}</a>
                     </li>
                     @endforeach
                     
                   </ul>
+                </form>
                 </div>
               </aside>
 
@@ -113,13 +115,19 @@
       </div>
     </section>
     <script type="text/javascript">
+      $(document).on('click','.categories', function (event) { 
+    var tableid = $(this).closest('li').attr('data-cateid');
+    alert(tableid);
+});
+    </script>
+    {{-- <script type="text/javascript">
       $(document).ready(function(){
         
         $('#cate').click(function(){
           var id_cate=$(this).val();
           $.ajax({
             url: '{{route('loadCateItems')}}',
-            method: 'POST',
+            method: 'GET',
             data:{
               _token: "{{ csrf_token() }}",
               id_cate:id_cate
@@ -135,5 +143,5 @@
           })
         });
       });
-    </script>
+    </script> --}}
 @endsection

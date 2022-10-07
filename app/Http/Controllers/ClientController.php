@@ -44,4 +44,10 @@ class ClientController extends Controller
         $images=Products::find($id)->Images;
         return view('client.pages.product',['pro'=>$pro,'images'=>$images]);
     }
+
+    public function getCateItemByCate($id)
+    {
+        $cateItems=CateItems::where('cate_id','=',$id)->get();
+        return $cateItems;
+    }
 }
