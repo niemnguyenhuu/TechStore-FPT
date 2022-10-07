@@ -11,7 +11,7 @@ class Orders extends Model
     protected $table = 'orders';
     protected $primary = 'id';
     protected $dates = 'date';
-    public $timestamps = false;
+    public $timestamps = true;
     protected $attributes = [
         'status'=>0,
         'note'=>''

@@ -10,7 +10,6 @@ class Comments extends Model
     use HasFactory;
     protected $table = 'comments';
     protected $primary = 'id';
-    public $timestamps = true;
     protected $date= 'time';
     protected $attributes = [
         'num_like'=>0,

@@ -27,6 +27,7 @@ Route::prefix('/')->group(function () {
     Route::get('/',[ClientController::class,'index'] )->name('index');
     Route::get('/category/{id}',[ClientController::class,'getProByCate'])->name('getProByCate');
     Route::get('/cateitem/{id}',[ClientController::class,'getProByCateItem'])->name('getProByCateItem');
+    Route::post('/getcateitem/{id}',[ClientController::class,'getCateItemByCate'])->name('getCateItemByCate');
     Route::get('product/{id}',[ClientController::class,'getProById'])->name('getProById');
     Route::get('contact',[ClientController::class,'contact'] )->name('contact');
 });
