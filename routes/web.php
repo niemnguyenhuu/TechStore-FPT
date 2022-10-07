@@ -5,7 +5,6 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CateItemController;
-use Illuminate\Support\Facades\Auth;
 
 
 /*
@@ -27,14 +26,14 @@ Route::prefix('/')->group(function () {
     Route::get('/',[ClientController::class,'index'] )->name('index');
     Route::get('/category/{id}',[ClientController::class,'getProByCate'])->name('getProByCate');
     Route::get('/cateitem/{id}',[ClientController::class,'getProByCateItem'])->name('getProByCateItem');
-    Route::post('/getcateitem/{id}',[ClientController::class,'getCateItemByCate'])->name('getCateItemByCate');
     Route::get('product/{id}',[ClientController::class,'getProById'])->name('getProById');
-    Route::get('contact',[ClientController::class,'contact'] )->name('contact');
 });
 Route::get('/checkout', function () {
     return view('client/checkout');
 });
-
+Route::get('/contact', function () {
+    return view('client/contact');
+});
 Route::get('/single-blog', function () {
     return view('client/single-blog');
 });
@@ -46,7 +45,7 @@ Route::get('/tracking', function () {
 });
 Route::get('cateItems',[ProductController::class,'loadCateItem'])->name('CateItems');
 // admin
-Route::prefix('admin')->middleware('checkAdmin')->group(function () {
+Route::prefix('admin')->group(function () {
     Route::prefix('products')->group(function () {
         Route::get('index',[ProductController::class,'index'])->name('listPro');
         Route::get('create',[ProductController::class,'createView'])->name('loadCreatePro');
@@ -71,8 +70,11 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::post('edit', [CateItemController::class,'edit'])->name('editCateItem');
     });
 });
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth'])->name('dashboard');
+Route::get('/admin/products',[ProductController::class,'index']);
+Route::get('/admin/pro', function () {
+    return view('admin/pages/product');
+});
+Route::get('/register', function () {
+    return view('client/pages/register');
+});
 
-require __DIR__.'/auth.php';

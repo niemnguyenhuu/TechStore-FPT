@@ -5,7 +5,7 @@
  * Licensed under MIT (https://github.com/twbs/bootstrap/blob/master/LICENSE)
  */
 
-:root {
+ :root {
     --blue: #007bff;
     --indigo: #6610f2;
     --purple: #6f42c1;
@@ -5659,7 +5659,7 @@ button.close {
     right: 0;
     bottom: 0;
     left: 0;
-    z-index: 1040;
+    z-index: 9;
     background-color: #000
 }
 
@@ -5673,15 +5673,14 @@ button.close {
 
 .modal-header {
     display: -ms-flexbox;
-    display: flex;
     -ms-flex-align: start;
-    align-items: flex-start;
     -ms-flex-pack: justify;
-    justify-content: space-between;
+    justify-content: center;
     padding: 1rem;
     border-bottom: 1px solid #e9ecef;
     border-top-left-radius: .3rem;
-    border-top-right-radius: .3rem
+    border-top-right-radius: .3rem;
+    align-items: flex-start;
 }
 
 .modal-header .close {
