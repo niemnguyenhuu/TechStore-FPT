@@ -70,8 +70,8 @@
                   <form action="" method="post">
                   <ul class="list" id="cate">
                     @foreach ($allCate as $cate)
-                    <li data-cateid="{{$cate->id}}">
-                      <a href="#" class="categories">{{$cate->name}}</a>
+                    <li class="categories" data-cateid="{{$cate->id}}">
+                      <a class="">{{$cate->name}}</a>
                     </li>
                     @endforeach
                     
@@ -85,7 +85,7 @@
                   <h3>Thương hiệu sản phẩm</h3>
                 </div>
                 <div class="widgets_inner">
-                  <ul class="list">
+                  <ul class="list" id="cate_items">
                     @foreach ($cti_bar as $item)
                     <li>
                       <a href="{{route('getProByCateItem',$item->id)}}">{{$item->name}}</a>
@@ -114,34 +114,29 @@
         </div>
       </div>
     </section>
-    <script type="text/javascript">
-      $(document).on('click','.categories', function (event) { 
-    var tableid = $(this).closest('li').attr('data-cateid');
-    alert(tableid);
-});
-    </script>
-    {{-- <script type="text/javascript">
+      <script src="{{ URL::asset('js/jquery-3.2.1.min.js')}}"></script>
+     <script type="text/javascript">
       $(document).ready(function(){
         
-        $('#cate').click(function(){
-          var id_cate=$(this).val();
+        $('.categories').click(function(){
+          var id_cate=$(this).data('cateid');
           $.ajax({
-            url: '{{route('loadCateItems')}}',
-            method: 'GET',
+            url: '{{route('getCateItemByCate')}}',
+            method: 'post',
             data:{
               _token: "{{ csrf_token() }}",
               id_cate:id_cate
             },
             success:function(data){
-              $("select[name='cate_id'").html('');
+              $("#cate_items").html('');
                     $.each(data, function(key, value){
-                        $("select[name='cate_id']").append(
-                            "<option value=" + value.id + ">" + value.name + "</option>"
+                        $("#cate_items").append(
+                          "<li><a href={{route('getProByCateItem', " value.id ")}}>" +value.name +"</a></li>"
                         );
                     });
             }
           })
         });
       });
-    </script> --}}
+    </script> 
 @endsection

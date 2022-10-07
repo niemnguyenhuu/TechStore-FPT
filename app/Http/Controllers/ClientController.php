@@ -35,7 +35,7 @@ class ClientController extends Controller
     public function getProByCateItem($id)
     {
         $listPro=CateItems::find($id)->Products;
-        $cti_bar=Categories::find($id)->Cate_items;
+        $cti_bar=CateItems::where('cate_id','=',$id)->get();
         return view('client.pages.category',['listPro'=>$listPro,'cti_bar'=>$cti_bar]);
     }
     public function getProById($id)
@@ -45,9 +45,9 @@ class ClientController extends Controller
         return view('client.pages.product',['pro'=>$pro,'images'=>$images]);
     }
 
-    public function getCateItemByCate($id)
+    public function getCateItemByCate(Request $r)
     {
-        $cateItems=CateItems::where('cate_id','=',$id)->get();
-        return $cateItems;
+        $cateItems=CateItems::where('cate_id','=',$r->id_cate)->get();
+        return response()->json($cateItems);
     }
 }
