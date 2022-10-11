@@ -30,6 +30,8 @@ Route::prefix('/')->group(function () {
     Route::post('/getcateitem',[ClientController::class,'getCateItemByCate'])->name('getCateItemByCate');
     Route::get('product/{id}',[ClientController::class,'getProById'])->name('getProById');
     Route::get('contact',[ClientController::class,'contact'] )->name('contact');
+    Route::get('signup',[ClientController::class,'signup'] )->name('signup');
+    Route::get('/search',[ClientController::class,'search'] )->name('search');
 });
 Route::get('/checkout', function () {
     return view('client/checkout');
@@ -40,6 +42,9 @@ Route::get('/single-blog', function () {
 });
 Route::get('/single-product', function () {
     return view('client/product');
+});
+Route::get('/dk', function () {
+    return view('client/pages/register');
 });
 Route::get('/tracking', function () {
     return view('client/tracking');

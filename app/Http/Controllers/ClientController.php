@@ -41,7 +41,10 @@ class ClientController extends Controller
     public function getProById($id)
     {
         $pro=Products::find($id);
+        $pro->view=$pro->view+1;
+        $pro->save();
         $images=Products::find($id)->Images;
+
         return view('client.pages.product',['pro'=>$pro,'images'=>$images]);
     }
 
@@ -49,5 +52,26 @@ class ClientController extends Controller
     {
         $cateItems=CateItems::where('cate_id','=',$r->id_cate)->get();
         return response()->json($cateItems);
+    }
+    public function signup()
+    {
+        return view('client.pages.register');
+    }
+
+    // Tìm kiếm
+    public function search(){
+        $listPro=CateItems::all();
+        $cti_bar=Categories::all();
+        $keywords = $_GET['keywords'];
+        $listPro=Products::where('name','LIKE', '%'.$keywords.'%')
+        ->orWhere('detail','LIKE', '%'.$keywords.'%')->get();
+        if(count($listPro)==0){
+            $listPro = Products::all();
+            $MesSearch = 'Không tìm thấy kết quả của từ khóa: '.$keywords.'. Hiển thị danh sách sản phẩm:';
+            return view('client.pages.category')->with(compact('listPro','cti_bar','keywords','listPro', 'MesSearch'));
+        }else{
+            $MesSearch = 'Kết quả của từ khóa: '.$keywords.'.';
+            return view('client.pages.category')->with(compact('listPro','cti_bar','keywords','listPro', 'MesSearch'));
+        }
     }
 }
