@@ -1,8 +1,8 @@
 @extends('client.master')
 @section('title','Danh mục')
 @section('content')
-@include('client/partials/_nav')
-<section class="cat_product_area section_gap">
+
+<section style="padding: 80px 0px;" class="cat_product_area section_gap">
       <div class="container">
         <div class="row flex-row-reverse">
           <div class="col-lg-9">
@@ -23,7 +23,9 @@
                     <h4 style="font-size: 130%;">{{$MesSearch}}</h4>
                 </div>
                 @endif
+                
               </div>
+              
             </div>
             
             <div class="latest_product_inner">
@@ -72,16 +74,14 @@
                   <h3>Duyệt qua danh mục</h3>
                 </div>
                 <div class="widgets_inner">
-                  <form action="" method="post">
                   <ul class="list" id="cate">
                     @foreach ($allCate as $cate)
-                    <li class="categories" data-cateid="{{$cate->id}}">
-                      <a class="">{{$cate->name}}</a>
+                    <li>
+                      <a href="{{route('getProByCate',$cate->id)}}">{{$cate->name}}</a>
                     </li>
                     @endforeach
                     
                   </ul>
-                </form>
                 </div>
               </aside>
 
@@ -90,7 +90,7 @@
                   <h3>Thương hiệu sản phẩm</h3>
                 </div>
                 <div class="widgets_inner">
-                  <ul class="list" id="cate_items">
+                  <ul class="list">
                     @foreach ($cti_bar as $item)
                     <li>
                       <a href="{{route('getProByCateItem',$item->id)}}">{{$item->name}}</a>
@@ -119,29 +119,28 @@
         </div>
       </div>
     </section>
-      <script src="{{ URL::asset('js/jquery-3.2.1.min.js')}}"></script>
-     <script type="text/javascript">
+    <script type="text/javascript">
       $(document).ready(function(){
         
-        $('.categories').click(function(){
-          var id_cate=$(this).data('cateid');
+        $('#cate').click(function(){
+          var id_cate=$(this).val();
           $.ajax({
-            url: '{{route('getCateItemByCate')}}',
-            method: 'post',
+            url: '{{route('loadCateItems')}}',
+            method: 'POST',
             data:{
               _token: "{{ csrf_token() }}",
               id_cate:id_cate
             },
             success:function(data){
-              $("#cate_items").html('');
+              $("select[name='cate_id'").html('');
                     $.each(data, function(key, value){
-                        $("#cate_items").append(
-                          "<li><a >" +value.name +"</a></li>"
+                        $("select[name='cate_id']").append(
+                            "<option value=" + value.id + ">" + value.name + "</option>"
                         );
                     });
             }
           })
         });
       });
-    </script> 
+    </script>
 @endsection

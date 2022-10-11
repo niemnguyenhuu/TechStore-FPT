@@ -19,8 +19,12 @@
   <link rel="stylesheet" href="{{ URL::asset('vendors/animate-css/animate.css')}}" />
   <link rel="stylesheet" href="{{ URL::asset('vendors/jquery-ui/jquery-ui.css')}}" />
   <!-- main css -->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/all.css">
+
   <link rel="stylesheet" href="{{ URL::asset('css/style.css')}}" />
   <link rel="stylesheet" href="{{ URL::asset('css/responsive.css')}}" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
 </head>
 
 <body>
@@ -49,6 +53,7 @@
   <script src="{{ URL::asset('vendors/counter-up/jquery.counterup.js')}}"></script>
   <script src="{{ URL::asset('js/mail-script.js')}}"></script>
   <script src="{{ URL::asset('js/theme.js')}}"></script>
+  <script></script>
 </body>
 
 </html>
