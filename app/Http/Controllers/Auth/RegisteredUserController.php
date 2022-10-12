@@ -33,14 +33,14 @@ class RegisteredUserController extends Controller
      */
     public function store(Request $request)
     {
-        $request->validate([
-            'name' => ['required', 'string', 'max:255'],
-            'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
-            'password' => ['required', 'confirmed', Rules\Password::defaults()],
-            'file_upload' => ['required', 'max:255'],
-            'address' => ['required', 'string', 'max:255'],
-            'phone' => ['required', 'numeric']
-        ]);
+        // $request->validate([
+        //     'name' => ['required', 'string', 'max:255'],
+        //     'email' => ['required', 'string', 'email', 'max:255', 'unique:users'],
+        //     'password' => ['required', 'confirmed', Rules\Password::defaults()],
+        //     'file_upload' => ['required', 'max:255'],
+        //     'address' => ['required', 'string', 'max:255'],
+        //     'phone' => ['required', 'numeric']
+        // ]);
         if($request->has('file_upload')){
             $file=$request->file_upload;
             $file_name= date('YmdHi').$file->getClientOriginalName();

@@ -4,7 +4,7 @@
 <main>
   <section class="signup-section">
   <div class="container">    
-    <div class="card bg-light">
+    <div class="card bg-light" style="border: none">
     <article class="card-body mx-auto" style="max-width: 400px;">
       <h4 class="card-title mt-3 text-center">Tạo tài khoản</h4>
       <p class="text-center">Bắt đầu với tài khoản miễn phí của bạn</p>
@@ -36,6 +36,12 @@
               <span class="input-group-text"><i class="fas fa-key"></i> </span>
           </div>
           <input name="password" class="form-control" placeholder="Mật khẩu" type="password">
+        </div>
+        <div class="form-group input-group">
+          <div class="input-group-prepend">
+              <span class="input-group-text"><i class="fas fa-key"></i> </span>
+          </div>
+          <input name="" class="form-control" placeholder="Nhập lại Mật khẩu" type="password">
         </div>
         <div class="form-group input-group">
           <div class="input-group-prepend">
