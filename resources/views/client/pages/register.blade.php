@@ -2,39 +2,6 @@
 @section('title','Đăng ký')
 @section('content')
 <main>
-  {{-- <div class="w-form-register">
-    <div class="container">
-      <form>
-        <div class="form-group">
-          <label for="exampleInputEmail1">Tài khoản</label>
-          <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tài khoản">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Email</label>
-          <input type="email" class="form-control" id="exampleInputPassword1" placeholder="Địa chỉ email của bạn">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Mật khẩu</label>
-          <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Mật khẩu của bạn">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Ảnh đại diện</label>
-          <input type="file" class="file-control" id="exampleInputPassword1">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Địa chỉ</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Địa chỉ của bạn">
-        </div>
-        <div class="form-group">
-          <label for="exampleInputPassword1">Số điện thoại</label>
-          <input type="text" class="form-control" id="exampleInputPassword1" placeholder="Số điện thoại của bạn">
-        </div>
-        <button type="submit" class=" b-submit">Đăng ký</button>
-        
-      </form>  
-    </div>
-    
-  </div> --}}
   <section class="signup-section">
   <div class="container">    
     <div class="card bg-light">
