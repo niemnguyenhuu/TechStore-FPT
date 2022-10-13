@@ -1,5 +1,5 @@
 @extends('client.master')
-@section('title','Thông tin t')
+@section('title','Thông tin tài khoản')
 @section('content')
 <main>
     <section class="vh-100" style="background-color: #f4f5f7;">

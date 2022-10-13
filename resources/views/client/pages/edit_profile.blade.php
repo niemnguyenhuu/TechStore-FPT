@@ -20,25 +20,46 @@
                 </div> <div class="row mt-2"> 
                     <div class="col-md-6">
                         <label class="labels">Họ và tên</label>
-                        <input type="text" class="form-control" placeholder="first name" value="">
+                        <input type="text" class="form-control" placeholder="Họ và tên" value="">
                     </div> 
                     <div class="col-md-6">
                         <label class="labels">Địa chỉ email</label>
-                        <input type="text" class="form-control" value="" placeholder="surname">
+                        <input type="text" class="form-control" value="" placeholder="Địa chỉ email">
                     </div> 
                 </div> 
-            </div> <div class="row mt-2"> 
-                <div class="col-md-6">
-                    <label class="labels">Ngày tạo</label>
-                    <input type="date" disabled class="form-control" placeholder="first name" value="2022-10-14">
+                <div class="row mt-3"> 
+                    <div class="col-md-6">
+                        <label class="labels">Mật khẩu</label>
+                        <input type="text" class="form-control" placeholder="Mật khẩu" value="" name="password">
+                    </div> 
+                    <div class="col-md-6">
+                        <label class="labels">Xác nhận mật khẩu</label>
+                        <input type="text" class="form-control" value="" placeholder="Xác nhận mật khẩu" name="password">
+                    </div> 
+                </div>  
+                
+                <div class="row mt-3"> 
+                    <div class="col-md-6">
+                        <label class="labels">Địa chỉ</label>
+                        <input type="text" class="form-control" placeholder="Địa chỉ" value="" name="address">
+                    </div> 
+                    <div class="col-md-6">
+                        <label class="labels">Số điện thoại</label>
+                        <input type="text" class="form-control" value="" placeholder="Số điện thoại">
+                    </div> 
                 </div> 
-                <div class="col-md-6">
-                    <label class="labels">Ngày chỉnh sửa</label>
-                    <input type="date" class="form-control" value="" placeholder="surname">
+                <div class="row mt-3"> 
+                    <div class="col-md-6">
+                        <label class="labels">Trạng thái</label>
+                        <input type="text" class="form-control" placeholder="Trạng thái" value="">
+                    </div> 
+                    <div class="col-md-6">
+                        <label class="labels">Vai trò</label>
+                        <input type="text" class="form-control" value="" placeholder="Vai trò">
+                    </div> 
                 </div> 
-            </div> 
                 <div class="mt-5 text-center">
-                    <button class="btn btn-form" type="button">Cập nhật thông tin</button>
+                    <button class="btn btn-form" type="button">Cập nhật tài khoản</button>
                 </div> 
             </div> 
         </div> 

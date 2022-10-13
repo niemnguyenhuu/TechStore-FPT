@@ -30,12 +30,7 @@
             </li>
             @if (Auth::check()) 
             <li>
-                <form action="/logout" method="post">
-                    @csrf
-                    <button>
-                        {{Auth::user()->name}}
-                    </button>
-                </form>
+                        <a href="">{{Auth::user()->name}}</a>
             </li>
             @else
             <li>
