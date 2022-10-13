@@ -57,7 +57,18 @@ class ClientController extends Controller
     {
         return view('client.pages.register');
     }
-
+    public function forgotpassword()
+    {
+        return view('client.pages.forgot_password');
+    }
+    public function manager()
+    {
+        return view('client.pages.manager');
+    }
+    public function edit_profile()
+    {
+        return view('client.pages.edit_profile');
+    }
     // Tìm kiếm
     public function search(){
         $listPro=CateItems::all();
