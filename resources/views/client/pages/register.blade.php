@@ -65,7 +65,7 @@
           </div><!-- form-group// -->
  <!-- form-group end.// -->                                  
         <div class="form-group">
-            <button type="submit" class="btn btn-primary btn-block"> Đăng ký tài khoản </button>
+            <button type="submit" class="btn btn-lg btn-block btn-form"> Đăng ký tài khoản </button>
         </div> <!-- form-group// -->      
         <p class="text-center">Bạn đã có tài khoản? <a href="/">Đăng nhập</a> </p>                                                                 
     </form>

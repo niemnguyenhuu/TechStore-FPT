@@ -36,7 +36,6 @@
                         {{Auth::user()->name}}
                     </button>
                 </form>
-                
             </li>
             @else
             <li>
@@ -121,40 +120,53 @@
                         <i class="ti-shopping-cart"></i>
                     </a>
                     </li>
-    
+                    @if (Auth::check())
+                    <li class="nav-item dropdown">
+                        <a href="#" class="icons dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ti-user" aria-hidden="true"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="manager"><i class="ti-user py-2" aria-hidden="true"></i>  Quản lý tài khoản</a>
+                            <form action="/logout" method="post">
+                                @csrf
+                                <button class="dropdown-item btn-none"><i class="ti-user" aria-hidden="true"></i>  Đăng xuất</button>
+                            </form>
+                          </div>
+                    </li>    
+                    @else
                     <li class="nav-item">
-                    <a href="#" class="icons" data-toggle="modal" data-target="#myModal">
-                        <i class="ti-user" aria-hidden="true"></i>
-                    </a>
-                    <div class="container">
+                        <a href="#" class="icons" data-toggle="modal" data-target="#myModal">
+                            <i class="ti-user" aria-hidden="true"></i>
+                        </a>
+                        <div class="container">
                         <!-- Modal -->
-                        <div class="modal fade" id="myModal" role="dialog">
-                          <div class="modal-dialog">
+                            <div class="modal fade" id="myModal" role="dialog">
+                                <div class="modal-dialog">
                           
                             <!-- Modal content-->
-                            <div class="modal-content">
-                              <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal">&times;</button>
-                                <h4 class="modal-title text-center">Đăng nhập</h4>
-                              </div>
-                              <div class="modal-body">
-                                <form action="{{ route('login') }}" method="POST">
-                                    @csrf
-                                    <div class="form-group">
-                                      <label for="exampleInputEmail1">Tài khoản</label>
-                                      <input type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập Email của bạn">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                        <h4 class="modal-title text-center">Đăng nhập</h4>
                                     </div>
-                                    <div class="form-group">
-                                      <label for="exampleInputPassword1">Mật khẩu</label>
-                                      <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Nhập mật khẩu">
-                                    </div>
-                                    <div class="form-check">
-                                      <input type="checkbox" name="remember" class="form-check-input" id="exampleCheck1">
-                                      <label class="form-check-label" for="exampleCheck1">Lưu thông tin</label>
-                                    </div>
-                                    <button type="submit" class=" b-submit">Đăng nhập</button>
-                                    
-                                  </form>                        
+                                <div class="modal-body">
+                                    <form action="{{ route('login') }}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                        <label for="exampleInputEmail1">Tài khoản</label>
+                                        <input type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập Email của bạn">
+                                        </div>
+                                        <div class="form-group">
+                                        <label for="exampleInputPassword1">Mật khẩu</label>
+                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Nhập mật khẩu">
+                                        </div>
+                                        <div class="form-check align-items-center">
+                                        <input type="checkbox" name="remember" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label my-1" for="exampleCheck1">Lưu thông tin</label>
+                                        </div>
+                                        <button type="submit" class="my-4 btn btn-lg btn-block btn-form">Đăng nhập</button>
+                                        
+                                    </form>                        
                                 </div>
                               <div class="modal-footer">
                                 <p class="m-0">Bạn chưa có tài khoản ? <a href="{{Route('signup')}}"  data-toggle="modal" data-target="#myModal">Đăng ký</a></p>
@@ -167,7 +179,7 @@
                         
                       </div>
                     </li>
-    
+    @endif
                     <li class="nav-item">
                         <a href="#" class="icons">
                             <i class="ti-heart" aria-hidden="true"></i>

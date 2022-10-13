@@ -3196,6 +3196,9 @@ input[type=submit].btn-block {
     color: #212529;
     text-align: left;
     list-style: none;
+    top: 50px;
+    right: 0;
+    left: -30px;
     background-color: #fff;
     background-clip: padding-box;
     border: 1px solid rgba(0, 0, 0, .15);
@@ -3319,14 +3322,14 @@ input[type=submit].btn-block {
 .dropdown-item {
     display: block;
     width: 100%;
-    padding: .25rem 1.5rem;
+    padding: 10px;
     clear: both;
     font-weight: 400;
     color: #212529;
     text-align: inherit;
     white-space: nowrap;
     background-color: transparent;
-    border: 0
+    border: none;
 }
 
 .dropdown-item:focus,
