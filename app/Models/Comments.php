@@ -12,12 +12,11 @@ class Comments extends Model
     protected $primary = 'id';
     protected $date= 'time';
     protected $attributes = [
-        'num_like'=>0,
-        'num_unlike'=>0,
-        'status'=> 0
+
+        'rate'=> 0
     ];
     protected $fillable = [
-        'pro_id ','user_id','content','rate','num_like','num_unlike','time','status'
+        'pro_id ','user_id','content','rate','time','status'
     ];
     public function Products()
     {

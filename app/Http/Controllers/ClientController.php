@@ -7,6 +7,10 @@ use App\Models\Categories;
 use App\Models\CateItems;
 use App\Models\Products;
 use App\Models\Comments;
+use App\Models\User;
+use DB;
+use Illuminate\Support\Facades\Auth;
+
 
 class ClientController extends Controller
 {
@@ -45,7 +49,17 @@ class ClientController extends Controller
         $pro->save();
         $images=Products::find($id)->Images;
 
-        return view('client.pages.product',['pro'=>$pro,'images'=>$images]);
+        $coutall = DB::table('comments')->where('pro_id','=',$pro->id)->count();
+        $cout5 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 5)->count();
+        $cout4 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 4)->count();
+        $cout3 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 3)->count();
+        $cout2 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 2)->count();
+        $cout1 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 1)->count();
+        $tong = ((($cout5*5)+($cout4*4)+($cout3*3)+($cout2*2)+($cout1*1))/$coutall);
+        $Round =  round($tong, 1);
+        $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
+
+        return view('client.pages.product',['pro'=>$pro,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round]);
     }
 
     public function getCateItemByCate(Request $r)
@@ -84,5 +98,29 @@ class ClientController extends Controller
             $MesSearch = 'Kết quả của từ khóa: '.$keywords.'.';
             return view('client.pages.category')->with(compact('listPro','cti_bar','keywords','listPro', 'MesSearch'));
         }
+    }
+
+    //comment
+    public function store($id, Request $request)
+    {
+        $pro_id = $id;
+        $comment = new Comments();
+        $product = Products::find($id);
+        $comment->pro_id = $pro_id;
+        $comment->user_id = Auth::user()->id;
+
+
+        $comment->content = $request->content;
+
+        if($request->rating_status > 0){
+            $comment->status = $request->rating_status;
+        }
+        else{
+            $comment->status = 5;
+        }
+
+        $comment->save();
+
+        return redirect()->back();
     }
 }
