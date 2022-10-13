@@ -31,6 +31,9 @@ Route::prefix('/')->group(function () {
     Route::get('product/{id}',[ClientController::class,'getProById'])->name('getProById');
     Route::get('contact',[ClientController::class,'contact'] )->name('contact');
     Route::get('signup',[ClientController::class,'signup'] )->name('signup');
+    Route::get('forgotpassword',[ClientController::class,'forgotpassword'] )->name('forgotpassword');
+    Route::get('manager',[ClientController::class,'manager'] )->name('manager');
+    Route::get('edit_profile',[ClientController::class,'edit_profile'] )->name('edit_profile');
     Route::get('/search',[ClientController::class,'search'] )->name('search');
 });
 Route::get('/checkout', function () {
