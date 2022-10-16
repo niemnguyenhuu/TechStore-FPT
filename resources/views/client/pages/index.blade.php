@@ -3,18 +3,44 @@
 @section('content')
 <!--================Home Banner Area =================-->
 <section class="home_banner_area mb-40">
-    <div class="banner_inner d-flex align-items-center">
-        <div class="container">
-            <div class="banner_content row">
-                <div class="col-lg-12">
-                    <p class="sub text-uppercase">Bộ sưu tập đàn ông</p>
-                    <h3><span>Thể hiện</span> phong cách <br />Personal <span>của bạn</span></h3>
-                    <h4>Fowl thấy khô mà ở trên cùng một chỗ.</h4>
-                    <a class="main_btn mt-40" href="#">Xem bộ sưu tập</a>
-                </div>
-            </div>
+    <div id="demo" class="carousel slide" data-ride="carousel">
+        @foreach ($allslide as $slide)
+        <ul class="carousel-indicators">
+          <li data-target="#demo" data-slide-to="0" class="active"></li>
+          <li data-target="#demo" data-slide-to="1"></li>
+          <li data-target="#demo" data-slide-to="2"></li>
+        </ul>
+        <div class="carousel-inner">
+          <div class="carousel-item active">
+            <img src="{{asset('images/slider/'.$slide->image)}}" alt="Los Angeles" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>{{$slide->sile_number}}</h3>
+              <p>{{$slide->pro_id}}</p>
+            </div>   
+          </div>
+          <div class="carousel-item">
+            <img src="{{asset('images/slider/'.$slide->image)}}" alt="Chicago" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>Chicago</h3>
+              <p>Thank you, Chicago!</p>
+            </div>   
+          </div>
+          <div class="carousel-item">
+            <img src="{{asset('images/slider/'.$slide->image)}}" alt="New York" width="1100" height="500">
+            <div class="carousel-caption">
+              <h3>{{$slide->sile_number}}</h3>
+              <p>{{$slide->pro_id}}</p>
+            </div>   
+          </div>
         </div>
-    </div>
+        <a class="carousel-control-prev" href="#demo" data-slide="prev">
+          <span class="carousel-control-prev-icon"></span>
+        </a>
+        <a class="carousel-control-next" href=  "#demo" data-slide="next">
+          <span class="carousel-control-next-icon"></span>
+        </a>
+        @endforeach
+      </div>
 </section>
 <!--================End Home Banner Area =================-->
 

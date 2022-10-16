@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CateItemController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\SLideController;
 
 
 /*
@@ -77,6 +78,14 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('delete/{id}', [CateItemController::class,'delete'])->name('deleteCateItem');
         Route::get('edit/{id}',[CateItemController::class,'loadEdit'])->name('loadEditCateItem');
         Route::post('edit', [CateItemController::class,'edit'])->name('editCateItem');
+    });
+    Route::prefix('slider')->group(function () {
+        Route::get('index', [SLideController::class,'index'])->name('listSlide');
+        Route::get('create', [SLideController::class,'loadCreate'])->name('loadCreateSlide');
+        Route::post('create',[SLideController::class,'create'])->name('createSlide');
+        Route::get('edit/{id}',[SLideController::class,'loadEdit'])->name('loadEditSlide');
+        Route::post('edit', [SLideController::class,'edit'])->name('editSlide');
+        Route::get('delete/{id}', [SLideController::class,'delete'])->name('deleteSlide');
     });
 });
 Route::get('/dashboard', function () {

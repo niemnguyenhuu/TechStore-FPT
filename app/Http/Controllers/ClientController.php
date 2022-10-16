@@ -7,6 +7,8 @@ use App\Models\Categories;
 use App\Models\CateItems;
 use App\Models\Products;
 use App\Models\Comments;
+use App\Models\Slider;
+use App\Models\Wishlist;
 
 class ClientController extends Controller
 {
@@ -14,6 +16,8 @@ class ClientController extends Controller
     {
         $allCate=Categories::all();
         view()->share('allCate', $allCate);
+        $allslide=Slider::all();
+        view()->share('allslide', $allslide);
     }
     public function index()
     {
@@ -84,5 +88,27 @@ class ClientController extends Controller
             $MesSearch = 'Kết quả của từ khóa: '.$keywords.'.';
             return view('client.pages.category')->with(compact('listPro','cti_bar','keywords','listPro', 'MesSearch'));
         }
+    }
+    // Danh sách yêu thích
+    public function addWishlist($pro_id) {
+        $wishlist = \DB::table('wishlist')
+        ->where([
+            'user_id',
+            'pro_id',
+        ])->first();
+
+        if($wishlist)
+            return redirect()->back()->with('danger', 'Đã thêm vào yêu thích');
+        
+            $idwishlist=\DB::table('wishlist')
+            ->insert([
+                'user_id',
+                'pro_id',
+            ]);
+
+            if ($idwishlist){
+                return redirect()->back()->with('success','Thêm vào yêu thích thành công');
+            }
+            return redirect()->back()->with('success','Thêm vào yêu thích thành công');
     }
 }

@@ -26,6 +26,19 @@
         </div>
       </li>
       <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+          <i class="mdi mdi-circle-outline menu-icon"></i>
+          <span class="menu-title">Slider</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="auth">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{Route('createSlide')}}"> Thêm mới </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{Route('listSlide')}}"> Danh sách </a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="pages/icons/mdi.html">
           <i class="mdi mdi-emoticon menu-icon"></i>
           <span class="menu-title">Bình luận</span>
