@@ -18,6 +18,9 @@ class ClientController extends Controller
         view()->share('allCate', $allCate);
         $allslide=Slider::all();
         view()->share('allslide', $allslide);
+        //slider
+        $slider=Slider::orderBy('id','DESC')->where('slide_status',1)->take(4)->get();
+        view()->share('slider', $slider);
     }
     public function index()
     {
@@ -90,7 +93,11 @@ class ClientController extends Controller
         }
     }
     // Danh sách yêu thích
-    public function addWishlist($pro_id) {
+    public function wish()
+    {
+        # code...
+    }
+    public function addWish($pro_id) {
         $wishlist = \DB::table('wishlist')
         ->where([
             'user_id',

@@ -2,46 +2,49 @@
 @section('title','TechStore')
 @section('content')
 <!--================Home Banner Area =================-->
-<section class="home_banner_area mb-40">
-    <div id="demo" class="carousel slide" data-ride="carousel">
-        @foreach ($allslide as $slide)
-        <ul class="carousel-indicators">
-          <li data-target="#demo" data-slide-to="0" class="active"></li>
-          <li data-target="#demo" data-slide-to="1"></li>
-          <li data-target="#demo" data-slide-to="2"></li>
-        </ul>
-        <div class="carousel-inner">
-          <div class="carousel-item active">
-            <img src="{{asset('images/slider/'.$slide->image)}}" alt="Los Angeles" width="1100" height="500">
-            <div class="carousel-caption">
-              <h3>{{$slide->sile_number}}</h3>
-              <p>{{$slide->pro_id}}</p>
-            </div>   
-          </div>
-          <div class="carousel-item">
-            <img src="{{asset('images/slider/'.$slide->image)}}" alt="Chicago" width="1100" height="500">
-            <div class="carousel-caption">
-              <h3>Chicago</h3>
-              <p>Thank you, Chicago!</p>
-            </div>   
-          </div>
-          <div class="carousel-item">
-            <img src="{{asset('images/slider/'.$slide->image)}}" alt="New York" width="1100" height="500">
-            <div class="carousel-caption">
-              <h3>{{$slide->sile_number}}</h3>
-              <p>{{$slide->pro_id}}</p>
-            </div>   
-          </div>
+<section id="slider"><!--slider-->
+        <div class="container">
+            <div class="row">
+                <div class="col-sm-12">
+                    <div id="slider-carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#slider-carousel" data-slide-to="0" class="active"></li>
+                            <li data-target="#slider-carousel" data-slide-to="1"></li>
+                            <li data-target="#slider-carousel" data-slide-to="2"></li>
+                        </ol>
+                        
+                        <div class="carousel-inner">
+                        @php 
+                            $i = 0;
+                        @endphp
+                        @foreach($slider as $key => $slide)
+                            @php 
+                                $i++;
+                            @endphp
+                            <div class="item {{$i==1 ? 'active' : '' }}">
+                               
+                                <div class="col-sm-12">
+                                    <img alt="{{$slide->slide_desc}}" src="{{asset('/images/slider/'.$slide->image)}}" height="200" width="100%" class="img img-responsive">
+                                   
+                                </div>
+                            </div>
+                        @endforeach  
+                          
+                            
+                        </div>
+                        
+                        <a href="#slider-carousel" class="left control-carousel hidden-xs" data-slide="prev">
+                            <i class="fa fa-angle-left"></i>
+                        </a>
+                        <a href="#slider-carousel" class="right control-carousel hidden-xs" data-slide="next">
+                            <i class="fa fa-angle-right"></i>
+                        </a>
+                    </div>
+                    
+                </div>
+            </div>
         </div>
-        <a class="carousel-control-prev" href="#demo" data-slide="prev">
-          <span class="carousel-control-prev-icon"></span>
-        </a>
-        <a class="carousel-control-next" href=  "#demo" data-slide="next">
-          <span class="carousel-control-next-icon"></span>
-        </a>
-        @endforeach
-      </div>
-</section>
+    </section><!--/slider-->
 <!--================End Home Banner Area =================-->
 
 <!-- Start feature Area -->

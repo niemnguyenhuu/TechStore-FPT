@@ -86,7 +86,14 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('edit/{id}',[SLideController::class,'loadEdit'])->name('loadEditSlide');
         Route::post('edit', [SLideController::class,'edit'])->name('editSlide');
         Route::get('delete/{id}', [SLideController::class,'delete'])->name('deleteSlide');
+        Route::get('unactive/{id}', [SLideController::class,'unactive'])->name('off');
+        Route::get('active/{id}', [SLideController::class,'active'])->name('on');
     });
+});
+
+Route::prefix('wishlist')->group(function () {
+    Route::get('index', [ClientController::class,'wishindex'])->name('listwish');
+    Route::get('/add/{id}', [ClientController::class,'addWish'])->name('addwishlist');  
 });
 Route::get('/dashboard', function () {
     return view('dashboard');

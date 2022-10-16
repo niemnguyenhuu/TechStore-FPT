@@ -4,6 +4,10 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Slider;
+use Session;
+use DB;
+use App\Http\Requests;
+use Illuminate\Support\Facades\Redirect;
 class SLideController extends Controller
 {
     public function __construct()
@@ -13,6 +17,7 @@ class SLideController extends Controller
     }
     public function index()
     {
+        $allslide=Slider::orderBy('id','DESC')->get();
         return view('admin.pages.slider.index');
     }
     public function loadCreate()
@@ -33,10 +38,10 @@ class SLideController extends Controller
 
         $slide->name=$r->name;
         $slide->image=$r->image;
-        $slide->slide_number=$r->slide_number;
-        $slide->pro_id=$r->pro_id;
+        $slide->slide_status=$r->slide_status;
+        $slide->slide_desc=$r->slide_desc;
         $slide->save();
-
+        Session::put('message', 'Thêm slide thành công');
         return redirect(route('listSlide'));
 
     }
@@ -62,8 +67,8 @@ class SLideController extends Controller
 
        $slide->name=$request->name;
         $slide->image=$image;
-        $slide->slide_number=$request->slide_number;
-        $slide->pro_id=$request->pro_id;
+        $slide->slide_status=$request->slide_status;
+        $slide->slide_desc=$request->slide_desc;
         $slide->save();
         
         return redirect(route('listSlide'));
@@ -74,5 +79,17 @@ class SLideController extends Controller
         $slide=Slider::find($id);
         $slide->delete($id);
         return redirect(route('listSlide'));
+    }
+    public function unactive($id){
+        DB::table('slider')->where('id',$id)->update(['slide_status'=>0]);
+        Session::put('message','Bạn chưa kích hoạt slider');
+        return redirect(route('listSlide'));
+
+    }
+    public function active($id){
+        DB::table('slider')->where('id',$id)->update(['slide_status'=>1]);
+        Session::put('message','Kích hoạt slider thành công');
+        return redirect(route('listSlide'));
+
     }
 }

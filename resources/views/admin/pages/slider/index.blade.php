@@ -13,9 +13,9 @@
                   <tr>
                       <th>Id</th>
                       <th>Tên</th>
-                      <th>Hình</th>
-                      <th>Thứ tự</th>
-                      <th>Sản phẩm liên kết</th>
+                      <th>Hình ảnh</th>
+                      <th>Mô tả</th>
+                      <th>Trạng thái</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -24,8 +24,20 @@
                     <td>{{$slide->id}}</td>
                     <td>{{$slide->name}}</td>
                     <td><img src="{{asset('images/slider/'.$slide->image)}}" alt="" style="width:100px; height:100px"></td>
-                    <td>{{$slide->silde_number}}</td>
-                    <td>{{$slide->pro_id}}</td>
+                    <td>{{$slide->slide_desc}}</td>
+                    <td><span class="text-ellipsis">
+                      <?php
+                       if($slide->slide_status==1){
+                        ?>
+                        <a href="{{route('off', $slide->id)}}">OFF<span class="fa fa-heart"></span></a>
+                        <?php
+                         }else{
+                        ?>  
+                         <a href="{{route('on', $slide->id)}}">ON<span class="fa fa-heart"></span></a>
+                        <?php
+                       }
+                      ?>
+                    </span></td>
                     <td><a class="badge badge-info rounded" href="{{route('loadEditSlide',$slide->id)}}">Sửa</a>
                     <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deleteSlide',$slide->id)}}">Xóa</a></td>
                   

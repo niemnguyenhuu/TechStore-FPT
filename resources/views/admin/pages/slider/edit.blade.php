@@ -26,19 +26,21 @@
                 <img src="{{asset('images/slider/'.$slide->image)}}" width="30%" alt="Không có ảnh">
               </div>
               
+              <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="exampleSelectGender">Vị trí</label>
-                      <select class="form-control" name="slide_number" id="exampleSelectGender">
-                        <option value="0" selected>1</option>
-                        <option value="1">2</option>
-                        <option value="2">3</option>
-                      </select>
+                    <label for="exampleSelectGender">Mô tả Slider</label>
+                      <textarea style="resize: none" rows="8" class="form-control" name="slide_desc" id="
+                      exampleInputPassword1" placeholder="Mô tả danh mục"></textarea>
                   </div>
                 </div>
+                </div>
                 <div class="form-group">
-                  <label>ID sản phẩm</label>
-                  <input type="number" name="pro_id" class="form-control">
+                  <label for="exampleInputPassword1">Trạng Thái</label>
+                  <select name="slide_status" class="form-control input-sm m-bot-15">
+                    <option value="0">Ẩn</option>
+                    <option value="1">HIển thị</option>
+                  </select>
                 </div>
               <div>
          </div>
