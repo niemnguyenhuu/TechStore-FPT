@@ -48,18 +48,22 @@ class ClientController extends Controller
         $pro->view=$pro->view+1;
         $pro->save();
         $images=Products::find($id)->Images;
-
         $coutall = DB::table('comments')->where('pro_id','=',$pro->id)->count();
         $cout5 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 5)->count();
         $cout4 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 4)->count();
         $cout3 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 3)->count();
         $cout2 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 2)->count();
         $cout1 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 1)->count();
-        $tong = ((($cout5*5)+($cout4*4)+($cout3*3)+($cout2*2)+($cout1*1))/$coutall);
+        $tong = ($cout5*5+$cout4*4+$cout3*3+$cout2*2+$cout1*1)/$coutall;
         $Round =  round($tong, 1);
         $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
-
-        return view('client.pages.product',['pro'=>$pro,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round]);
+        if($coutall>0){
+            return view('client.pages.product',['pro'=>$pro,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round]);
+        }
+        else{
+            return view('client.pages.product',['pro'=>$pro,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1]);
+        }
+        
     }
 
     public function getCateItemByCate(Request $r)

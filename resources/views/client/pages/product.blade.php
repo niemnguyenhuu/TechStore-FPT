@@ -272,8 +272,13 @@
                   <div class="col-6">
                     <div class="box_total">
                       <h5>Tổng thể</h5>
+                      @if (isset($Round))
                       <h4>{{$Round}}</h4>
                       <h6>({{$coutall}} Nhận xét)</h6>
+                      @else
+                      Chưa có đánh giá
+                      @endif
+                      
                     </div>
                   </div>
                   <div class="col-6">
