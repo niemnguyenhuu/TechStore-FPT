@@ -89,7 +89,7 @@
                         }
                     </style>
                     <!-- search ân -->
-                        <div style="float: left; width: 66%; height:10px;" class="collapse" id="collapseExample">
+                        <div style="float: left; width: 63%; height:10px;" class="collapse" id="collapseExample">
                             <div style=" border: none; padding: 1.05rem;" class="card card-body" >
                                 <!-- code -->
                                 <form action="{{url('search')}}" method="GET">

@@ -15,7 +15,7 @@ class CategoryController extends Controller
         view()->share('allCate', $allCate);
 
     }
-    public function index(Type $var = null)
+    public function index()
     {
         return view('admin.pages.categories.index');
     }

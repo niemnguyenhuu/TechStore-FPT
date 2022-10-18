@@ -30,6 +30,7 @@ class ProductController extends Controller
     }
     public function create(Request $r)
     {
+     
         $pro=new Products();
 
         if($r->has('file_upload')){
@@ -45,14 +46,14 @@ class ProductController extends Controller
         $pro->price=$r->price;
         $pro->discount=$r->discount;
         $pro->image=$r->image;
-        $pro->date=$r->date;
+      //  $pro->date=$r->date;
         $pro->quantity=$r->quantity;
         $pro->detail=$r->detail;
         $pro->hot=$r->hot;
         $pro->status=$r->status;
         $pro->save();
 
-        oastr()->success('Thành công', 'Thêm sản phẩm thành công');
+        toastr()->success('Thành công', 'Thêm sản phẩm thành công');
         return redirect(route('listPro'));
 
     }
@@ -81,7 +82,7 @@ class ProductController extends Controller
         $pro->price=$request->price;
         $pro->discount=$request->discount;
         $pro->image=$image;
-        $pro->date=$request->date;
+       // $pro->date=$request->date;
         $pro->quantity=$request->quantity;
         $pro->detail=$request->detail;
         $pro->hot=$request->hot;

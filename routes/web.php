@@ -6,6 +6,8 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CateItemController;
 use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CommentController;
+
 
 
 /*
@@ -82,6 +84,14 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('edit/{id}',[CateItemController::class,'loadEdit'])->name('loadEditCateItem');
         Route::post('edit', [CateItemController::class,'edit'])->name('editCateItem');
     });
+    Route::prefix('comments')->group(function () {
+        Route::get('index',[CommentController::class,'index'])->name('listCom');
+        Route::get('delete/{id}',[CommentController::class,'destroy'])->name('deleteCom');
+        Route::get('/index1',[CommentController::class,'index1'] )->name('search1');
+        Route::get('/index2',[CommentController::class,'index2'] )->name('search2');
+        Route::get('/index3',[CommentController::class,'index3'] )->name('search3');
+
+    }); 
 });
 Route::get('/dashboard', function () {
     return view('dashboard');

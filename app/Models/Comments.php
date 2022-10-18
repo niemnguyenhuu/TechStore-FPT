@@ -24,6 +24,6 @@ class Comments extends Model
     }
     public function Users()
     {
-        return $this-> belongsTo('App\Models\Users','user_id','id');
+        return $this-> belongsTo('App\Models\User','user_id','id');
     }
 }

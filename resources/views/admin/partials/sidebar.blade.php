@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" href="index.html">
+        <a class="nav-link" href="{{route('index')}}">
           <i class="mdi mdi-home menu-icon"></i>
           <span class="menu-title">Trang chủ</span>
         </a>
@@ -26,7 +26,7 @@
         </div>
       </li>
       <li class="nav-item">
-        <a class="nav-link" href="pages/icons/mdi.html">
+        <a class="nav-link" href="{{route('listCom')}}">
           <i class="mdi mdi-emoticon menu-icon"></i>
           <span class="menu-title">Bình luận</span>
         </a>

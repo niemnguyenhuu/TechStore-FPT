@@ -9,9 +9,9 @@ class Products extends Model
 {
     use HasFactory;
     protected $table = 'products';
-    protected $primary = 'id';
-    protected $dates = ['date'];
-    public $timestamps = true;
+   // protected $primary = 'id';
+   // protected $dates = ['date'];
+   // public $timestamps = true;
     protected $attributes = [
         'image'=>'',
         'discount'=>0,
