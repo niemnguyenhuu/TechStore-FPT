@@ -7,6 +7,8 @@ use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CateItemController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
+
 
 
 
@@ -92,6 +94,21 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('/index3',[CommentController::class,'index3'] )->name('search3');
 
     }); 
+    Route::prefix('users')->group(function () {
+        Route::get('index',[UserController::class,'index'])->name('listUser');
+        Route::get('show/{id}',[UserController::class,'show'])->name('showUser');
+
+        // Route::get('create',[ProductController::class,'createView'])->name('loadCreatePro');
+        Route::post('update/{id}',[UserController::class,'update'])->name('updateUser');
+
+
+        Route::get('delete/{id}',[UserController::class,'destroy'])->name('deleteUser');
+
+
+        Route::get('/index1',[UserController::class,'index1'] )->name('search1');
+
+    });
+
 });
 Route::get('/dashboard', function () {
     return view('dashboard');
