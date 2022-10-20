@@ -96,16 +96,18 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
     }); 
     Route::prefix('users')->group(function () {
         Route::get('index',[UserController::class,'index'])->name('listUser');
-        Route::get('show/{id}',[UserController::class,'show'])->name('showUser');
+        Route::get('index5',[UserController::class,'index5'])->name('listUserAd');
 
-        // Route::get('create',[ProductController::class,'createView'])->name('loadCreatePro');
-        Route::post('update/{id}',[UserController::class,'update'])->name('updateUser');
+        Route::get('show/{id}',[UserController::class,'show'])->name('showUser');
+        Route::post('update',[UserController::class,'update'])->name('updateUser');
+        Route::get('block/{id}',[UserController::class,'block'])->name('blockUser');
+
 
 
         Route::get('delete/{id}',[UserController::class,'destroy'])->name('deleteUser');
 
 
-        Route::get('/index1',[UserController::class,'index1'] )->name('search1');
+        Route::get('/index4',[UserController::class,'index4'] )->name('search4');
 
     });
 

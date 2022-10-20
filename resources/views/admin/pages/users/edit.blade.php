@@ -5,41 +5,30 @@
       <div class="col-12 grid-margin stretch-card">
         <div class="card">
           <div class="card-body">
-            <h4 class="card-title">Sửa Sản Phẩm</h4>
+            <h4 class="card-title">Sửa người dùng</h4>
             <p class="card-description">
               Nhập thông tin
             </p>
-            <form method="POST" action="{{route('editPro')}}" enctype="multipart/form-data" id="form-edit-product" class="forms-sample">
+            <form method="POST" action="{{route('updateUser')}}" enctype="multipart/form-data" id="form-edit-user" class="forms-sample">
               @csrf
-              <input type="hidden" name="id" value="{{$pro->id}}" id="">
-              <input type="hidden" name="image1" value="{{$pro->image}}" id="">
-              <div class="form-group">
-                <label for="exampleInputName1">Tên Sản Phẩm</label>
-                <input type="text" name="name" value="{{$pro->name}}" class="form-control fullname" id="exampleInputName1" placeholder="Nhập tên sản phẩm">
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>
+              <input type="hidden" name="id" value="{{$user->id}}" id="">
+              <input type="hidden" name="image1" value="{{$user->image}}" id="">
+              <input type="hidden" name="email_verified_at" value="{{$user->email_verified_at}}" id="">
+              <input type="hidden" name="password" value="{{$user->password}}" id="">
+              <input type="hidden" name="remember_token" value="{{$user->remember_token}}" id="">
+
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="exampleSelectGender">Danh Mục</label>
-                      <select class="form-control show-cti list" name="categories" id="cate">
-                        @foreach ($allCate as $cate)
-                            @if ($cate->id==$pro->Categories->id)
-                              <option data-id="{{$cate->id}}" selected value="{{$cate->id}}">{{$cate->name}}</option>
-                            @else
-                              <option data-id="{{$cate->id}}" value="{{$cate->id}}">{{$cate->name}}</option>
-                            @endif
-                            
-                        @endforeach
-                      </select>
-                      <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+                    <label for="exampleInputName1">Tên người dùng</label>
+                    <input type="text" name="name" value="{{$user->name}}" class="form-control fullname" id="exampleInputName1" placeholder="Nhập tên người dùng">
+                    <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="exampleSelectGender">Hãng</label>
-                    <select class="form-control show-cti firm" name="cate_id">
-                    </select>
+                    <label for="exampleSelectGender">Địa chỉ</label>
+                    <input type="text" value="{{$user->address}}" name="address" class="form-control price" id="exampleInputName1" placeholder="Nhập địa chỉ">
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
@@ -47,56 +36,25 @@
               <div class="row">
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="exampleInputName1">Giá</label>
-                    <input type="number" value="{{$pro->price}}" name="price" class="form-control price" id="exampleInputName1" placeholder="Nhập Giá Sản Phẩm">
+                    <label for="exampleInputName1">Email</label>
+                    <input type="email" value="{{$user->email}}" name="email" class="form-control price" id="exampleInputName1" placeholder="Nhập email">
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
                 <div class="col-sm-6">
                   <div class="form-group">
-                    <label for="exampleInputName1">Giảm Giá</label>
-                    <input type="number" value="{{$pro->discount}}" name="discount" class="form-control discount" id="exampleInputName1" placeholder="Nhập % Giảm giá">
-                    <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                  </div>
-                </div>
-              </div>
-              <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="exampleSelectGender">Ngày Đăng</label>
-                    <input type="date" value="{{$pro->date}}" name="date" class="form-control date" id="exampleInputEmail3" placeholder="Nhập ngày đăng">
-                    <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-                  </div>
-                </div>
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="exampleInputName1">Số lượng</label>
-                    <input type="number" value="{{$pro->quantity}}" name="quantity" class="form-control amount" id="exampleInputName1" placeholder="Nhập số lượng">
+                    <label for="exampleInputName1">Số điện thoại</label>
+                    <input type="text" value="{{$user->phone}}" name="phone" class="form-control discount" id="exampleInputName1" placeholder="Nhập số điện thoại">
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
               </div>
               <div class="row">
-                <div class="col-sm-6">
-                  <div class="form-group">
-                    <label for="exampleSelectGender">Hot</label>
-                      <select class="form-control" name="hot" id="exampleSelectGender">
-                        @if ($pro->hot==0)
-                          <option value="0" selected>Bình Thường</option>
-                          <option value="1">Hot</option>
-                        @else
-                          <option value="0" >Bình Thường</option>
-                          <option value="1" selected>Hot</option>
-                        @endif
-                        
-                      </select>
-                  </div>
-                </div>
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleSelectGender">Trạng thái</label>
                       <select class="form-control status" name="status" id="exampleSelectGender">
-                        @if ($pro->status==0)
+                        @if ($user->status==0)
                           <option value="0" selected>Hiển thị</option>
                           <option value="1">Ẩn</option>
                         @else
@@ -104,6 +62,22 @@
                           <option value="1" selected>Ẩn</option>
                         @endif
                       </select>
+                    <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+                  </div>
+                </div>
+                <!-- <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="exampleSelectGender">Ngày tạo</label>
+                    <input type="date" value="{{$user->created_at}}" name="created_at" class="form-control date" id="exampleInputEmail3" disabled>
+                    <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
+                  </div>
+                </div> -->
+              </div>
+              <div class="row">
+                <div class="col-sm-6">
+                  <div class="form-group">
+                    <label for="exampleSelectGender">Phân quyền</label>
+                    <input type="number" value="{{$user->role}}" name="role" class="form-control date" id="exampleInputName1" >
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>
@@ -116,18 +90,11 @@
                   </div>
                 </div>
                 <div class="col-sm-6">
-                  <img src="{{asset('images/products/'.$pro->image)}}" width="30%" alt="ko cos anh">
+                  <img src="{{asset('images/users/'.$user->image)}}" width="30%" alt="Không có ảnh">
                 </div>
 
               </div>
-              
-              
-              
-              <div class="form-group">
-                <label for="exampleInputEmail3">Mô tả sản phẩm</label>
-                <textarea class="form-control describe" name="detail" id="exampleTextarea1" cols="10" rows="25">{{$pro->detail}}</textarea>
-                <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
-              </div>            
+                         
               <button type="submit" class="btn btn-primary mr-2">Cập nhật</button>
               <button type="button" class="btn btn-light">Cancel</button>
             </form>
@@ -136,30 +103,6 @@
       </div>
     </div>
 </div>
-
-<script type="text/javascript">
-  $(document).ready(function(){
-    $('#cate').click(function(){
-      var id_cate=$(this).val();
-      $.ajax({
-        url: '{{route('loadCateItems')}}',
-        method: 'POST',
-        data:{
-          _token: "{{ csrf_token() }}",
-          id_cate:id_cate
-        },
-        success:function(data){
-          $("select[name='cate_id'").html('');
-                $.each(data, function(key, value){
-                    $("select[name='cate_id']").append(
-                        "<option value=" + value.id + ">" + value.name + "</option>"
-                    );
-                });
-        }
-      })
-    });
-  });
-</script>
 
 
 <script>
@@ -328,7 +271,7 @@ Validator.isDescribe = function (selector) {
 // }
 
    Validator({
-    form: '#form-edit-product',
+    form: '#form-edit-user',
     errorSelector: '.form-message',
     rules: [
       Validator.isRequired('.fullname'),

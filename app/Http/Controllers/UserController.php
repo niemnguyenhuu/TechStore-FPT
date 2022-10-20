@@ -27,8 +27,8 @@ class UserController extends Controller
         //View client
         $allCom=Comments::all();
         $allPro=Products::all();
-        $allUser=User::all();
-        return view('admin.pages.users.index')->with(compact('allPro' , 'allUser', 'allCom'));
+        $allUser=User::where('role', '=', 0)->get();
+        return view('admin.pages.users.index')->with(compact('allPro', 'allUser', 'allCom'));
     }
 
     /**
@@ -36,15 +36,17 @@ class UserController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index1()
+    public function index4()
     {
         //View client
         $keywords = $_GET['keywords'];
         $allCom=Comments::all();
         $allPro=Products::all();
-        $allUser=User::where('id','LIKE', '%'.$keywords.'%')->orWhere('name','LIKE', '%'.$keywords.'%')
-        ->orWhere('address','LIKE', '%'.$keywords.'%')->get();
-        if(count($allUser)!=0){
+        $allUser=User::when($keywords, function ($query, $keywords) {
+            $query->where('id','LIKE', '%'.$keywords.'%')->orWhere('name','LIKE', '%'.$keywords.'%');
+        })->where('role', '=', 0)->get();
+
+        if((count($allUser)!=0)){
             $message = 'Kết quả của: '.$keywords.'.';
             return view('admin.pages.users.index')->with(compact('allPro' , 'allUser', 'allCom','message'));
         }
@@ -52,6 +54,22 @@ class UserController extends Controller
             $message = 'Không tìm thấy kết quả của: '.$keywords.'.';
             return view('admin.pages.users.index')->with(compact('allPro' , 'allUser', 'allCom','message'));
         }
+    }
+
+
+    /**
+     * Display a listing of the resource.
+     *
+     * @return \Illuminate\Http\Response
+     */
+    // view admin
+    public function index5()
+    {
+        //View client
+        $allCom=Comments::all();
+        $allPro=Products::all();
+        $allUser=User::where('role', '=', 1)->get();
+        return view('admin.pages.users.index1')->with(compact('allPro', 'allUser', 'allCom'));
     }
 
 
@@ -67,6 +85,42 @@ class UserController extends Controller
     }
 
     /**
+     * Store a newly created resource in storage.
+     *
+     * @param  \Illuminate\Http\Request  $request
+     * @return \Illuminate\Http\Response
+     */
+    public function block($id)
+    {
+        $user=User::find($id);
+
+        $user->name=$user->name;
+        $user->email=$user->email;
+        $user->email_verified_at=$user->email_verified_at;
+        $user->password=$user->password;
+        $user->image=$user->image;
+       // $pro->date=$request->date;
+        $user->remember_token=$user->remember_token;
+
+        $user->address=$user->address;
+        $user->phone=$user->phone;
+
+        if(($user->status)==1){
+            $user->status=0;
+        }else if(($user->status)==0){
+            $user->status=1;
+        }
+
+        $user->role=$user->role;
+        $user->save();
+
+
+        toastr()->success('Thành công', 'Cập nhật tài khoản thành công');
+        return back();
+    }
+    
+
+    /**
      * Display the specified resource.
      *
      * @param  int  $id
@@ -74,7 +128,8 @@ class UserController extends Controller
      */
     public function show($id)
     {
-        //
+        $user = User::find($id);
+        return view('admin.pages.users.edit')->with(compact('user'));
     }
 
     /**
@@ -84,9 +139,36 @@ class UserController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, $id)
+    public function update(Request $request)
     {
-        //
+        $user=User::find($request->id);
+
+        if($request->file_upload==''){
+            $image=$request->input('image1');
+        }
+        else if($request->has('file_upload')){
+            $file=$request->file_upload;
+            $file_name= $file->getClientoriginalName();
+            $file->move(public_path('images/users'),$file_name);
+            $image=$file_name;
+        }
+
+        $user->name=$request->name;
+        $user->email=$request->email;
+        $user->email_verified_at=$request->email_verified_at;
+        $user->password=$request->password;
+        $user->image=$image;
+       // $pro->date=$request->date;
+        $user->remember_token=$request->remember_token;
+
+        $user->address=$request->address;
+        $user->phone=$request->phone;
+        $user->status=$request->status;
+        $user->role=$request->role;
+        $user->save();
+
+        toastr()->success('Thành công', 'Cập nhật tài khoản thành công');
+        return redirect(route('listUser'));
     }
 
     /**
@@ -100,6 +182,6 @@ class UserController extends Controller
         $user= User::find($id);
         $user->delete();
         toastr()->success('Thành công', 'Xóa bình luận thành công');
-        return redirect(route('listUser'));
+        return back();
     }
 }

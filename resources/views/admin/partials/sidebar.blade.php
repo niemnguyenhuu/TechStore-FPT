@@ -40,7 +40,7 @@
         <div class="collapse" id="auth">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="{{route('listUser')}}"> Danh sách</a></li>
-            <li class="nav-item"> <a class="nav-link" href=""> Thêm Quản trị </a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{route('listUserAd')}}"> Danh sách quản trị </a></li>
           </ul>
         </div>
       </li>

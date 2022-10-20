@@ -8,16 +8,17 @@
             <p class="card-title">
               sách người dùng
             </p>
+
             <div class="col-md-4" style="float: left; margin:-2% 0% 2% -1%;">
-                <!-- onchange="this.form.submit()" để submit -->
-                <form action="{{route('search1')}}" method="GET">
+
+                <form action="{{route('search4')}}" method="GET">
                     @csrf
                     <div class="input-group">
                        <input style="margin-top: 2%;" name="keywords" type="search" class="form-control" placeholder="Lọc người dùng...">
                     </div>
                 </form>
-                
             </div>
+
             <div style="margin: 0% 0% 0% 1%">
               <h5>
                 <?php 
@@ -65,9 +66,9 @@
                     <td>{{$user->created_at}}</td>
 
                     <td>
-                        <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deleteCom',$user->id)}}">Chặn</a>
+                        <a class="badge badge-danger rounded" onclick="return confirm('Thay đổi trạng thái mục này?')" href="{{route('blockUser',$user->id)}}">Trạng thái</a>
                         <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deleteUser',$user->id)}}">Xóa</a>
-                        <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('showUser',$user->id)}}">Sửa</a>
+                        <a class="badge badge-danger rounded" onclick="return confirm('Sửa mục này?')" href="{{route('showUser',$user->id)}}">Sửa</a>
                     </td>
                 </tr>
                   @endforeach           
