@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\AdminController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
@@ -63,6 +64,10 @@ Route::get('/tracking', function () {
 Route::get('cateItems',[ProductController::class,'loadCateItem'])->name('CateItems');
 // admin
 Route::prefix('admin')->middleware('checkAdmin')->group(function () {
+    Route::prefix('main')->group(function () {
+        Route::get('index',[AdminController::class,'index'])->name('indexAdmin');
+    });
+
     Route::prefix('products')->group(function () {
         Route::get('index',[ProductController::class,'index'])->name('listPro');
         Route::get('create',[ProductController::class,'createView'])->name('loadCreatePro');

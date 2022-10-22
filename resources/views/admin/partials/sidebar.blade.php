@@ -1,7 +1,7 @@
 <nav class="sidebar sidebar-offcanvas" id="sidebar">
     <ul class="nav">
       <li class="nav-item">
-        <a class="nav-link" href="{{route('index')}}">
+        <a class="nav-link" href="{{route('indexAdmin')}}">
           <i class="mdi mdi-home menu-icon"></i>
           <span class="menu-title">Trang chủ</span>
         </a>
