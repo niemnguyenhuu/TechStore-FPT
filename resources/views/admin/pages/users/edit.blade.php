@@ -77,7 +77,16 @@
                 <div class="col-sm-6">
                   <div class="form-group">
                     <label for="exampleSelectGender">Phân quyền</label>
-                    <input type="number" value="{{$user->role}}" name="role" class="form-control date" id="exampleInputName1" >
+                    <select class="form-control" name="role" id="">
+                      @if ($user->role==0)
+                        <option selected value="0">Người Dùng</option>
+                        <option value="1">Quản Trị</option>
+                      @else
+                        <option selected value="1">Quản Trị</option>
+                        <option value="0">Người Dùng</option>
+                      @endif
+                      
+                    </select>
                     <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                   </div>
                 </div>

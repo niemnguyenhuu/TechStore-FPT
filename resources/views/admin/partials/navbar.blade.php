@@ -121,7 +121,7 @@ use Illuminate\Support\Facades\Auth;
   <li class="nav-item nav-profile dropdown">
     @if (Auth::check()) 
     <a class="nav-link dropdown-toggle" href="#" data-toggle="dropdown" id="profileDropdown">
-      <img src="{{ URL::asset('images/taikhoan/'.Auth::user()->hinhAnh)}}" alt="profile"/>
+      <img src="{{ URL::asset('images/users/'.Auth::user()->image)}}" alt="profile"/>
       <span class="nav-profile-name">{{Auth::user()->name}}</span>
     </a>
     <div class="dropdown-menu dropdown-menu-right navbar-dropdown" aria-labelledby="profileDropdown">
