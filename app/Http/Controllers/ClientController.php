@@ -54,13 +54,15 @@ class ClientController extends Controller
         $cout3 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 3)->count();
         $cout2 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 2)->count();
         $cout1 = DB::table('comments')->where('pro_id','=',$pro->id)->where('status', '=', 1)->count();
-        $tong = ($cout5*5+$cout4*4+$cout3*3+$cout2*2+$cout1*1)/$coutall;
-        $Round =  round($tong, 1);
-        $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
+        
         if($coutall>0){
+            $tong = ($cout5*5+$cout4*4+$cout3*3+$cout2*2+$cout1*1)/$coutall;
+            $Round =  round($tong, 1);
+            $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
             return view('client.pages.product',['pro'=>$pro,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1, 'Round'=>$Round]);
         }
         else{
+            $comm = DB::table('comments')->join('users' , 'users.id', '=', 'comments.user_id')->select('comments.*', 'users.name')->where('pro_id','=',$pro->id)->get();
             return view('client.pages.product',['pro'=>$pro,'images'=>$images, 'comm'=>$comm, 'coutall'=> $coutall,'cout5'=> $cout5,'cout4'=> $cout4,'cout3'=> $cout3,'cout2'=> $cout2,'cout1'=> $cout1]);
         }
         
