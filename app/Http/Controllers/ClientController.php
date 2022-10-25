@@ -9,6 +9,8 @@ use App\Models\Products;
 use App\Models\Comments;
 use App\Models\Slider;
 use App\Models\Wishlist;
+use DB;
+use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
 {
@@ -93,29 +95,36 @@ class ClientController extends Controller
         }
     }
     // Danh sách yêu thích
-    public function wish()
+    public function wishlist()
     {
-        # code...
+        $wishlist=Wishlist::where('user_id','=', Auth::user()->id)->get();
+        return view('client.pages.wishlist', compact('wishlist'));
     }
-    public function addWish($pro_id) {
-        $wishlist = \DB::table('wishlist')
-        ->where([
-            'user_id',
-            'pro_id',
-        ])->first();
-
-        if($wishlist)
-            return redirect()->back()->with('danger', 'Đã thêm vào yêu thích');
-        
-            $idwishlist=\DB::table('wishlist')
-            ->insert([
-                'user_id',
-                'pro_id',
-            ]);
-
-            if ($idwishlist){
-                return redirect()->back()->with('success','Thêm vào yêu thích thành công');
+    public function add(Request $request) {
+        if(Auth::check())
+        {
+            $pro_id = $request->input('pro_id');
+            if(Products::find($pro_id))
+            {
+                $wish = new Wishlist();
+                $wish->pro_id = $pro_id;
+                $wish->user_id = Auth::id();
+                $wish->save;
+                return response()->json(['status'=>"Sản phẩm đã được thêm vào yêu thích"]);
             }
-            return redirect()->back()->with('success','Thêm vào yêu thích thành công');
+            else{
+                return response()->json(['status'=>"Sản phẩm không tồn tại "]);
+            }
+        }
+        else{
+            return response()->json(['status'=>"Đăng nhập để tiếp tục"]);
+        }
+    }
+    public function delete($id)
+    {
+        
+        $wishlist=Wishlist::find($id);
+        $wishlist->delete();
+        return redirect(route('listWish'));
     }
 }

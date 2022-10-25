@@ -1,147 +1,96 @@
 @extends('client.master')
 @section('title','Danh mục')
 @section('content')
-@include('client/partials/_nav')
-<section class="cat_product_area section_gap">
-      <div class="container">
-        <div class="row flex-row-reverse">
-          <div class="col-lg-9">
-            <div class="product_top_bar">
-              <div class="left_dorp">
-                <select class="sorting">
-                  <option value="1">Mặc định phân loại</option>
-                  <option value="2">Mặc định phân loại 01</option>
-                  <option value="4">Mặc định phân loại 02</option>
-                </select>
-                <select class="show">
-                  <option value="1">Trình diễn 12</option>
-                  <option value="2">Trình diễn 14</option>
-                  <option value="4">Trình diễn 16</option>
-                </select>
-                @if (isset($MesSearch))
-                <div style="float: left; clear: both; padding: 6% 0% 1% 3%; margin: -3%;">
-                    <h4 style="font-size: 130%;">{{$MesSearch}}</h4>
-                </div>
-                @endif
-              </div>
-            </div>
-            
-            <div class="latest_product_inner">
-              <div class="row">
-                @foreach ($listPro as $pro)
-                <div class="col-lg-4 col-md-6">
-                  <div class="single-product">
-                    <div class="product-img">
-                      <img
-                        class="card-img"
-                        src="{{asset('images/products/'.$pro->image)}}"
-                        alt=""
-                      />
-                      <div class="p_icon">
-                        <a href="{{route('getProById',$pro->id)}}">
-                          <i class="ti-eye"></i>
-                        </a>
-                        <a href="{{route('addWish', $pro->id)}}">
-                          <i class="ti-heart"></i>
-                        </a>
-                        <a href="#">
-                          <i class="ti-shopping-cart"></i>
-                        </a>
-                      </div>
-                    </div>
-                    <div class="product-btm">
-                      <a href="{{route('getProById',$pro->id)}}" class="d-block">
-                        <h4>{{$pro->name}}</h4>
-                      </a>
-                      <div class="mt-3">
-                        <span class="mr-4">{{$pro->price-$pro->discount}} đ</span>
-                        <del>{{$pro->price}} đ</del>
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                @endforeach
-              </div>
-            </div>
-          </div>
-
-          <div class="col-lg-3">
-            <div class="left_sidebar_area">
-              <aside class="left_widgets p_filter_widgets">
-                <div class="l_w_title">
-                  <h3>Duyệt qua danh mục</h3>
-                </div>
-                <div class="widgets_inner">
-                  <form action="" method="post">
-                  <ul class="list" id="cate">
-                    @foreach ($allCate as $cate)
-                    <li class="categories" data-cateid="{{$cate->id}}">
-                      <a class="">{{$cate->name}}</a>
-                    </li>
-                    @endforeach
-                    
-                  </ul>
-                </form>
-                </div>
-              </aside>
-
-              <aside class="left_widgets p_filter_widgets">
-                <div class="l_w_title">
-                  <h3>Thương hiệu sản phẩm</h3>
-                </div>
-                <div class="widgets_inner">
-                  <ul class="list" id="cate_items">
-                    @foreach ($cti_bar as $item)
-                    <li>
-                      <a href="{{route('getProByCateItem',$item->id)}}">{{$item->name}}</a>
-                    </li>
-                    @endforeach
-                  </ul>
-                </div>
-              </aside>
-
-              <aside class="left_widgets p_filter_widgets">
-                <div class="l_w_title">
-                  <h3>Bộ lọc giá</h3>
-                </div>
-                <div class="widgets_inner">
-                  <div class="range_item">
-                    <div id="slider-range"></div>
-                    <div class="">
-                      <label for="amount">Gía : </label>
-                      <input type="text" id="amount" readonly />
-                    </div>
-                  </div>
-                </div>
-              </aside>
-            </div>
-          </div>
+<section class="banner_area">
+  <div class="banner_inner d-flex align-items-center">
+    <div class="container">
+      <div class="banner_content d-md-flex justify-content-between align-items-center">
+        <div class="mb-3 mb-md-0">
+          <h2>Danh sách yêu thích</h2>
+          <p>Sản phẩm yêu thích</p>
+        </div>
+        <div class="page_link">
+          <a href="index.html">Home</a>
+          <a href="#">Danh sách yêu thích</a>
+          <a href="category.html"></a>
         </div>
       </div>
-    </section>
+    </div>
+  </div>
+</section>
+<section class="cart_area">
+  <div class="container">
+    <div class="cart_inner">
+      <div class="table-responsive">
+        @foreach ($wishlist as $item)
+        <table class="table">
+          <thead>
+            <tr>
+              <th scope="col">Sản phẩm</th>
+              <th scope="col">Giá</th>
+              <th scope="col">Số lượng</th>
+              <th scope="col">Hành động</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>
+                <div class="media">
+                  <div class="row product_data">
+                    <img src="{{asset('/images/products/'.$item->products->image)}}" alt=""style="width:50%">
+                  </div>
+                  <div class="col-md-6 my-auto">
+                    <h6>{{$item->products->name}}</h6> 
+                  </div>
+                </div>
+              </td>
+              <td>
+                <div class="media-body">
+                <h6>{{$item->products->price}}</h6>
+                </div>
+              </td>
+              <td>
+                <div class="product_count">
+                  <input
+                    type="text"
+                    name="qty"
+                    id="sst"
+                    maxlength="12"
+                    value="1"
+                    title="Quantity:"
+                    class="input-text qty"
+                  />
+                  <button
+                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst )) result.value++;return false;"
+                    class="increase items-count"
+                    type="button"
+                  >
+                    <i class="lnr lnr-chevron-up"></i>
+                  </button>
+                  <button
+                    onclick="var result = document.getElementById('sst'); var sst = result.value; if( !isNaN( sst ) &amp;&amp; sst > 0 ) result.value--;return false;"
+                    class="reduced items-count"
+                    type="button"
+                  >
+                    <i class="lnr lnr-chevron-down"></i>
+                  </button>
+                </div>
+              </td>
+              <div class="col-md-2 my-auto"></div>
+              <td>
+                <h5><button class="btn btn-success"> <i class="fa fa-shopping-cart"></i> {{$item->id}} Thêm vào giỏ hàng</button></h5>
+              </td>
+              <td>
+                <h5><a href="{{route('deleteWish',$item->id)}}"><button class="btn btn-danger" onclick="return confirm('Xóa mục này?')"> <i class="fa fa-trash"></i> Xóa</button></a></h5>
+              </td>
+            </tr>
+            <tr>
+              <td>
+        </table>
+      </div>
+      @endforeach
+    </div>
+  </div>
+</section>
       <script src="{{ URL::asset('js/jquery-3.2.1.min.js')}}"></script>
-     <script type="text/javascript">
-      $(document).ready(function(){
-        
-        $('.categories').click(function(){
-          var id_cate=$(this).data('cateid');
-          $.ajax({
-            url: '{{route('getCateItemByCate')}}',
-            method: 'post',
-            data:{
-              _token: "{{ csrf_token() }}",
-              id_cate:id_cate
-            },
-            success:function(data){
-              $("#cate_items").html('');
-                    $.each(data, function(key, value){
-                        $("#cate_items").append(
-                          "<li><a >" +value.name +"</a></li>"
-                        );
-                    });
-            }
-          })
-        });
-      });
-    </script> 
 @endsection

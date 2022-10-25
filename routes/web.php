@@ -36,6 +36,9 @@ Route::prefix('/')->group(function () {
     Route::get('manager',[ClientController::class,'manager'] )->name('manager');
     Route::get('edit_profile',[ClientController::class,'edit_profile'] )->name('edit_profile');
     Route::get('/search',[ClientController::class,'search'] )->name('search');
+    Route::get('wishlist', [ClientController::class,'wishlist'])->name('listWish');
+    Route::post('addwishlist', [ClientController::class,'add'])->name('addWish');
+    Route::get('delete/{id}', [ClientController::class,'delete'])->name('deleteWish');
 });
 Route::get('/checkout', function () {
     return view('client/checkout');
@@ -89,11 +92,6 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('unactive/{id}', [SLideController::class,'unactive'])->name('off');
         Route::get('active/{id}', [SLideController::class,'active'])->name('on');
     });
-});
-
-Route::prefix('wishlist')->group(function () {
-    Route::get('index', [ClientController::class,'wishindex'])->name('listwish');
-    Route::get('/add/{id}', [ClientController::class,'addWish'])->name('addwishlist');  
 });
 Route::get('/dashboard', function () {
     return view('dashboard');

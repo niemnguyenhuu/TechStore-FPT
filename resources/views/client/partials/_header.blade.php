@@ -173,7 +173,7 @@
                     </li>
     @endif
                     <li class="nav-item">
-                        <a href="#" class="icons">
+                        <a href="{{route('listWish')}}" class="icons">
                             <i class="ti-heart" aria-hidden="true"></i>
                         </a>
                     </li>
