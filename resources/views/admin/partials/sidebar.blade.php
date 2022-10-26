@@ -44,6 +44,22 @@
           </ul>
         </div>
       </li>
+
+
+      <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#auth" aria-expanded="false" aria-controls="auth">
+          <i class="mdi mdi-account menu-icon"></i>
+          <span class="menu-title">Đăng nhập</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="auth">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{route('loginAdmin')}}">Login</a></li>
+          </ul>
+        </div>
+      </li>
+
+
       <li class="nav-item">
         <a class="nav-link" href="documentation/documentation.html">
           <i class="mdi mdi-file-document-box-outline menu-icon"></i>

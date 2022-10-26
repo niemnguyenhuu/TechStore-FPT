@@ -51,7 +51,18 @@ Route::get('/tracking', function () {
 });
 Route::get('cateItems',[ProductController::class,'loadCateItem'])->name('CateItems');
 // admin
+Route::get('/login3',[AdminController::class,'login3'])->name('loginAdmin');
 Route::prefix('admin')->middleware('checkAdmin')->group(function () {
+<<<<<<< Updated upstream
+=======
+    Route::prefix('main')->group(function () {
+        Route::get('index',[AdminController::class,'index'])->name('indexAdmin');
+       
+
+    });
+    
+
+>>>>>>> Stashed changes
     Route::prefix('products')->group(function () {
         Route::get('index',[ProductController::class,'index'])->name('listPro');
         Route::get('create',[ProductController::class,'createView'])->name('loadCreatePro');

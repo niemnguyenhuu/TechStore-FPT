@@ -123,10 +123,17 @@
                     </li>
     
                     <li class="nav-item">
+<<<<<<< Updated upstream
                     <a href="#" class="icons" data-toggle="modal" data-target="#myModal">
                         <i class="ti-user" aria-hidden="true"></i>
                     </a>
                     <div class="container">
+=======
+                        <a href="{{ URL::to('client.pages.login')}}" class="icons" data-toggle="modal" data-target="#myModal">
+                            <i class="ti-user" aria-hidden="true"></i>
+                        </a>
+                        <div class="container">
+>>>>>>> Stashed changes
                         <!-- Modal -->
                         <div class="modal fade" id="myModal" role="dialog">
                           <div class="modal-dialog">
