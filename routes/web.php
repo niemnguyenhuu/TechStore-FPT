@@ -40,6 +40,7 @@ Route::prefix('/')->group(function () {
     Route::get('edit_profile',[ClientController::class,'edit_profile'] )->name('edit_profile');
     Route::get('/search',[ClientController::class,'search'] )->name('search');
     Route::post('/product/comment/{id}',[ClientController::class,'store'])->name('store');
+    Route::get('/ordertracking',[ClientController::class,'ordertracking'] )->name('ordertracking');
 });
 
 

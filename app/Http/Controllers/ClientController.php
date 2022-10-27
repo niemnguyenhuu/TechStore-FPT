@@ -105,6 +105,11 @@ class ClientController extends Controller
             return view('client.pages.category')->with(compact('listPro','cti_bar','keywords','listPro', 'MesSearch'));
         }
     }
+    //orther
+
+    public function ordertracking(){
+        return view('client.pages.tracking');
+    }
 
     //comment
     public function store($id, Request $request)
