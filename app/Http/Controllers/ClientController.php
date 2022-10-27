@@ -103,10 +103,9 @@ class ClientController extends Controller
     public function add(Request $request) {
         if(Auth::check())
         {
-            $pro_id = $request->input('pro_id');
             if(Products::find($pro_id))
             {
-                $wish = new Wishlist();
+                $wish = new Wishlist($pro_id);
                 $wish->pro_id = $pro_id;
                 $wish->user_id = Auth::id();
                 $wish->save;

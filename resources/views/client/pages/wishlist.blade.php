@@ -78,7 +78,7 @@
               </td>
               <div class="col-md-2 my-auto"></div>
               <td>
-                <h5><button class="btn btn-success"> <i class="fa fa-shopping-cart"></i> {{$item->id}} Thêm vào giỏ hàng</button></h5>
+                <h5><button class="btn btn-success"> <i class="fa fa-shopping-cart"></i> Thêm vào giỏ hàng</button></h5>
               </td>
               <td>
                 <h5><a href="{{route('deleteWish',$item->id)}}"><button class="btn btn-danger" onclick="return confirm('Xóa mục này?')"> <i class="fa fa-trash"></i> Xóa</button></a></h5>
@@ -93,4 +93,23 @@
   </div>
 </section>
       <script src="{{ URL::asset('js/jquery-3.2.1.min.js')}}"></script>
+      <script type="text/javascript">
+        $(document).ready(function(){
+          
+          $('.addWish').click(function(){
+            var products_id=$(this).data('products_id');
+            $.ajax({
+              url: '/addWish',
+              type: 'POST',
+              data:{
+                products_id, products_id,
+                user_id = user_id,
+              },
+              success:function(response){
+                console.log(response);
+              }
+            })
+          });
+        });
+      </script> 
 @endsection

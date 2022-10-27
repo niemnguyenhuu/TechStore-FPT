@@ -37,7 +37,7 @@ Route::prefix('/')->group(function () {
     Route::get('edit_profile',[ClientController::class,'edit_profile'] )->name('edit_profile');
     Route::get('/search',[ClientController::class,'search'] )->name('search');
     Route::get('wishlist', [ClientController::class,'wishlist'])->name('listWish');
-    Route::post('addwishlist', [ClientController::class,'add'])->name('addWish');
+    Route::get('/add/{id}', [ClientController::class,'add'])->name('addWish');
     Route::get('delete/{id}', [ClientController::class,'delete'])->name('deleteWish');
 });
 Route::get('/checkout', function () {
