@@ -25,7 +25,9 @@ class checkAdmin
             else{
                 return redirect('login');
             }
-        }else{
+        }
+        
+        else{
             return redirect('login');
         }
 

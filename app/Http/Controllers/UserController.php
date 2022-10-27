@@ -9,6 +9,7 @@ use App\Models\Products;
 use App\Models\Comments;
 use App\Models\User;
 use DB;
+use Illuminate\Support\Facades\Auth;
 
 class UserController extends Controller
 {
@@ -17,6 +18,16 @@ class UserController extends Controller
         $allUser=User::all();
         view()->share('allUser', $allUser);
     }
+
+    public function adminLogin(Request $request){
+        if(Auth::attempt(['email' => $request->email, 'password' => $request->password])){
+            return redirect('admin/index');
+        }
+        else{
+            return redirect('login');
+        }
+    }
+    
     /**
      * Display a listing of the resource.
      *

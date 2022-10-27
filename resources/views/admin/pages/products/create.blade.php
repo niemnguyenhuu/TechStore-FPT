@@ -9,7 +9,7 @@
             <p class="card-description">
               Nhập thông tin
             </p>
-            <form method="POST" action="{{route('createPro')}}" enctype="multipart/form-data" id="form-product" class="forms-sample">
+            <form method="POST" action="{{route('createVariant')}}" enctype="multipart/form-data" id="form-product" class="forms-sample">
               @csrf
               <div class="form-group">
                 <label for="exampleInputName1">Tên Sản Phẩm</label>
@@ -115,7 +115,6 @@
                   <div class="col">
                     <div class="collapse multi-collapse" id="multiCollapseExample1">
                       <div class="card card-body">
-
                         <div class="row">
                           <div class="col-sm-6">
                             <div class="form-group">
@@ -137,7 +136,7 @@
                           <div class="col-sm-6">
                             <div class="form-group">
                               <label for="exampleSelectGender">Gía</label>
-                              <input type="number" name="price" class="form-control amount" id="exampleInputName1" placeholder="Nhập giá bán">                         
+                              <input type="number" name="price_var" class="form-control amount" id="exampleInputName1" placeholder="Nhập giá bán">                         
                               <span style="font-size: 15px; color: #f33a58; line-height: 3px; padding-top: 10px;  display: block;" class="form-message"></span>
                             </div>
                           </div>
@@ -186,10 +185,8 @@
                   </div>
                 </div>
               </div>           
-
               <button type="submit" class="btn btn-primary mr-2">Thêm mới</button>
               <button type="button" class="btn btn-light">Cancel</button>
-
             </form>
           </div>
         </div>

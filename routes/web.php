@@ -12,22 +12,6 @@ use App\Http\Controllers\UserController;
 
 
 
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| contains the "web" middleware group. Now create something great!
-|
-*/
-
-
-Route::get('/cart', function () {
-    return view('client/cart');
-});
 Route::prefix('/')->group(function () {
     Route::get('/',[ClientController::class,'index'] )->name('index');
     Route::get('/category/{id}',[ClientController::class,'getProByCate'])->name('getProByCate');
@@ -41,33 +25,36 @@ Route::prefix('/')->group(function () {
     Route::get('edit_profile',[ClientController::class,'edit_profile'] )->name('edit_profile');
     Route::get('/search',[ClientController::class,'search'] )->name('search');
     Route::post('/product/comment/{id}',[ClientController::class,'store'])->name('store');
+
+    Route::get('/checkout', function () {
+        return view('client/checkout');
+    });
+    Route::get('/cart', function () {
+        return view('client/cart');
+    });
+    Route::get('/single-blog', function () {
+        return view('client/single-blog');
+    });
+    Route::get('/single-product', function () {
+        return view('client/product');
+    });
+    Route::get('/dk', function () {
+        return view('client/pages/register');
+    });
+    Route::get('/tracking', function () {
+        return view('client/tracking');
+    });
 });
 
 
+// Admin Login
+Route::post('adminLogin', [UserController::class,'adminLogin'])->name('adminLogin');
 
-Route::get('/checkout', function () {
-    return view('client/checkout');
-});
 
-Route::get('/single-blog', function () {
-    return view('client/single-blog');
-});
-Route::get('/single-product', function () {
-    return view('client/product');
-});
-Route::get('/dk', function () {
-    return view('client/pages/register');
-});
-Route::get('/tracking', function () {
-    return view('client/tracking');
-});
 Route::get('cateItems',[ProductController::class,'loadCateItem'])->name('CateItems');
 // admin
 Route::prefix('admin')->middleware('checkAdmin')->group(function () {
-    Route::prefix('main')->group(function () {
         Route::get('index',[AdminController::class,'index'])->name('indexAdmin');
-    });
-
     Route::prefix('products')->group(function () {
         Route::get('index',[ProductController::class,'index'])->name('listPro');
         Route::get('create',[ProductController::class,'createView'])->name('loadCreatePro');
@@ -76,6 +63,12 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('delete/{id}',[ProductController::class,'delete'])->name('deletePro');
         Route::get('edit/{id}',[ProductController::class,'loadEdit'])->name('loadEditPro');
         Route::post('edit',[ProductController::class,'edit'])->name('editPro');
+
+        // Route::get('variant{id}',[ProductController::class,'loadAddVariant'])->name('loadAddVariant');
+        Route::get('variants/{id}',[ProductController::class,'showVariants'])->name('showVariants');
+        // Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
+        Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
+        Route::get('deleteVar/{id}',[ProductController::class,'deleteVar'])->name('deleteVar');
     }); 
     Route::prefix('categories')->group(function () {
         Route::get('index', [CategoryController::class,'index'])->name('listCate');
@@ -102,16 +95,10 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
     Route::prefix('users')->group(function () {
         Route::get('index',[UserController::class,'index'])->name('listUser');
         Route::get('index5',[UserController::class,'index5'])->name('listUserAd');
-
         Route::get('show/{id}',[UserController::class,'show'])->name('showUser');
         Route::post('update',[UserController::class,'update'])->name('updateUser');
         Route::get('block/{id}',[UserController::class,'block'])->name('blockUser');
-
-
-
         Route::get('delete/{id}',[UserController::class,'destroy'])->name('deleteUser');
-
-
         Route::get('/index4',[UserController::class,'index4'] )->name('search4');
 
     });
