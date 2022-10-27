@@ -13,7 +13,7 @@
             @foreach ($allslide as $key =>$slide)
           <div class="carousel-item {{ $key == 0 ? 'active':''}}">
             @if ($slide->image)
-            <img src="{{asset('images/slider/'.$slide->image)}}" alt="slide1" width="1100" height="500">
+            <img src="{{asset('images/slider/'.$slide->image)}}" alt="slide1" width="500" height="200">
             @endif 
             <div class="carousel-caption">
               <h3>{{$slide->slide_status}}</h3>

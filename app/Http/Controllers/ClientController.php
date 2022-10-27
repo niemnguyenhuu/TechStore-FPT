@@ -18,7 +18,7 @@ class ClientController extends Controller
     {
         $allCate=Categories::all();
         view()->share('allCate', $allCate);
-        $allslide=Slider::all();
+        $allslide=Slider::where('slide_status','=',1)->orderBy('id','DESC')->get();
         view()->share('allslide', $allslide);
         //slider
         $slider=Slider::orderBy('id','DESC')->where('slide_status',1)->take(4)->get();

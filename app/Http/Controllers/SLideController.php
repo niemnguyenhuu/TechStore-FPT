@@ -17,7 +17,7 @@ class SLideController extends Controller
     }
     public function index()
     {
-        $allslide=Slider::orderBy('id','DESC')->get();
+        $allslide=Slider::where('slide_status','=',1)->orderBy('id','DESC')->get();
         return view('admin.pages.slider.index');
     }
     public function loadCreate()
