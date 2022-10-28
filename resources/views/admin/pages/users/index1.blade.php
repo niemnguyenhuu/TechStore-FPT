@@ -6,12 +6,12 @@
         <div class="card">
           <div class="card-body">
             <p class="card-title">
-              sách người dùng
+              Danh sách quản trị viên
             </p>
 
             <div class="col-md-4" style="float: left; margin:-2% 0% 2% -1%;">
 
-                <form action="{{route('search4')}}" method="GET">
+                <form action="{{route('search8')}}" method="GET">
                     @csrf
                     <div class="input-group">
                        <input style="margin-top: 2%;" name="keywords" type="search" class="form-control" placeholder="Lọc người dùng...">
@@ -19,7 +19,7 @@
                 </form>
             </div>
 
-            <div style="margin: 0% 0% 0% 1%">
+            <div style=" clear: both; color: red; margin-left: 1%; margin: 0% 0% 0% 1%" class="row" >
               <h5>
                 <?php 
                   if(isset($message)){

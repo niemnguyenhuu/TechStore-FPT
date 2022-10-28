@@ -46,9 +46,11 @@ class CommentController extends Controller
         
         if(count($allCom)==0){
             $allCom=Comments::all();
-            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom', 'allUser'));
+            $mess = 'Không tìm thấy kết quả!!!. Hiển thị tất cả bình luận.';
+            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom', 'allUser','mess'));
         }else{
-            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom', 'allUser'));
+            $mess = 'Lọc theo tên: '.$keywords.'.';
+            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom', 'allUser', 'mess'));
         }
     }
 

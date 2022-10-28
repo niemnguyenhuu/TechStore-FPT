@@ -82,6 +82,25 @@ class UserController extends Controller
         $allUser=User::where('role', '=', 1)->get();
         return view('admin.pages.users.index1')->with(compact('allPro', 'allUser', 'allCom'));
     }
+    public function index6()
+    {
+        //View client
+        $keywords = $_GET['keywords'];
+        $allCom=Comments::all();
+        $allPro=Products::all();
+        $allUser=User::when($keywords, function ($query, $keywords) {
+            $query->where('id','=', '%'.$keywords.'%')->orWhere('name','LIKE', '%'.$keywords.'%');
+        })->where('role', '=', 1)->get();
+
+        if((count($allUser)!=0)){
+            $message = 'Kết quả của: '.$keywords.'.';
+            return view('admin.pages.users.index1')->with(compact('allPro' , 'allUser', 'allCom','message'));
+        }
+        else{
+            $message = 'Không tìm thấy kết quả của: '.$keywords.'.';
+            return view('admin.pages.users.index1')->with(compact('allPro' , 'allUser', 'allCom','message'));
+        }
+    }
 
 
     /**

@@ -10,7 +10,7 @@
             style="float: left;"
             >
             <!-- onchange="this.form.submit()" để submit -->
-              <form class="card-title" action="{{route('search1')}}" method="GET">
+              <form class="card-title" action="{{route('search1')}}" method="GET">  
                 @csrf
                 <div class="form-group">
                   <select class="form-control show-cti form-select list" name="keywords_pro_id" id="pro" onchange="this.form.submit()">
@@ -52,6 +52,16 @@
                         </select>
                     </div>
               </form>
+            </div>
+
+            <div class="row" style=" clear: both; color: red; margin-left: 1%;">
+              <h5>
+                <?php
+                  if(isset($mess)){
+                    echo $mess;
+                  }
+                ?>
+              </h5>
             </div>
             
             <div class="table-responsive">

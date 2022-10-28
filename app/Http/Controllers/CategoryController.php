@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Categories;
 use App\Models\CateItems;
 use App\Models\Products;
+use DB;
 
 class CategoryController extends Controller
 {
@@ -17,7 +18,15 @@ class CategoryController extends Controller
     }
     public function index()
     {
-        return view('admin.pages.categories.index');
+        $allPro = Products::select('id')->get();
+        $coutAllPro = count($allPro);
+
+        $cate = Products::where('cate_id','=','14')->select('id')->get();
+        $coutCate =count($cate);
+        //Lấy % theo loại
+        $theoCte1 = (($coutCate/$coutAllPro) * 100);
+
+        return view('admin.pages.categories.index')->with(compact('theoCte1','coutAllPro','coutCate'));
     }
     public function create(Request $request)
     {

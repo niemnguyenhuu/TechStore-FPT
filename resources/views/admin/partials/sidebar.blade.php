@@ -26,6 +26,19 @@
         </div>
       </li>
       <li class="nav-item">
+        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+          <i class="mdi mdi-circle-outline menu-icon"></i>
+          <span class="menu-title">Mã giảm giá</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="ui-basic">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{route('loadDiscount_code')}}">Thêm mới</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{route('listDiscount')}}">Danh sách</a></li>
+          </ul>
+        </div>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="{{route('listCom')}}">
           <i class="mdi mdi-emoticon menu-icon"></i>
           <span class="menu-title">Bình luận</span>

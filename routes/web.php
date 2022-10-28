@@ -9,6 +9,7 @@ use App\Http\Controllers\CateItemController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\DiscountsCodeController;
 
 
 
@@ -57,6 +58,11 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('index',[AdminController::class,'index'])->name('indexAdmin');
     Route::prefix('products')->group(function () {
         Route::get('index',[ProductController::class,'index'])->name('listPro');
+
+        Route::get('/index5',[ProductController::class,'index5'] )->name('search5');
+        Route::get('/index6',[ProductController::class,'index6'] )->name('search6');
+        Route::get('/index7',[ProductController::class,'index7'] )->name('search7');
+
         Route::get('create',[ProductController::class,'createView'])->name('loadCreatePro');
         Route::post('cateItems',[ProductController::class,'loadCateItem'])->name('loadCateItems');
         Route::post('create',[ProductController::class,'create'])->name('createPro');
@@ -69,6 +75,8 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         // Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
         Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
         Route::get('deleteVar/{id}',[ProductController::class,'deleteVar'])->name('deleteVar');
+
+
     }); 
     Route::prefix('categories')->group(function () {
         Route::get('index', [CategoryController::class,'index'])->name('listCate');
@@ -100,6 +108,16 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('block/{id}',[UserController::class,'block'])->name('blockUser');
         Route::get('delete/{id}',[UserController::class,'destroy'])->name('deleteUser');
         Route::get('/index4',[UserController::class,'index4'] )->name('search4');
+        Route::get('/index6',[UserController::class,'index6'] )->name('search8');
+
+    });
+    Route::prefix('discounts')->group(function () {
+        Route::get('index',[DiscountsCodeController::class,'index'])->name('listDiscount');
+        Route::get('show',[DiscountsCodeController::class,'show'])->name('loadDiscount_code');
+        Route::post('store',[DiscountsCodeController::class,'store'])->name('storeDiscount_code');
+        Route::get('showid/{id}',[DiscountsCodeController::class,'showid'])->name('loadUpdateDiscount_code');
+        Route::post('update', [DiscountsCodeController::class,'update'])->name('updateDiscount_code');
+        Route::get('delete/{id}',[DiscountsCodeController::class,'destroy'])->name('deleteDiscount_code');
 
     });
 

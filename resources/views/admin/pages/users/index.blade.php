@@ -6,7 +6,7 @@
         <div class="card">
           <div class="card-body">
             <p class="card-title">
-              sách người dùng
+              Danh sách người dùng
             </p>
 
             <div class="col-md-4" style="float: left; margin:-2% 0% 2% -1%;">
@@ -19,7 +19,7 @@
                 </form>
             </div>
 
-            <div style="margin: 0% 0% 0% 1%">
+            <div style=" clear: both; color: red; margin-left: 1%; margin: 0% 0% 0% 1%" class="row" >
               <h5>
                 <?php 
                   if(isset($message)){
