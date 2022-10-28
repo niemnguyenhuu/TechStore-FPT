@@ -173,8 +173,12 @@
                     </li>
     @endif
                     <li class="nav-item">
+                        @php
+                        $wishlistcount = (App\Models\Wishlist::count());
+                        @endphp
                         <a href="{{route('listWish')}}" class="icons">
                             <i class="ti-heart" aria-hidden="true"></i>
+                            <span><a style="color:rgb(220, 22, 22);">{{$wishlistcount}}</a></span>
                         </a>
                     </li>
                 </ul>

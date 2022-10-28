@@ -12,12 +12,12 @@ class SLideController extends Controller
 {
     public function __construct()
     {
-        $allslide=Slider::all();
+        $allslide = Slider::all();
         view()->share('allslide', $allslide);
     }
     public function index()
     {
-        $allslide=Slider::where('slide_status','=',1)->orderBy('id','DESC')->get();
+        $allslide = Slider::where('slide_status','=',1)->orderBy('id','DESC')->get();
         return view('admin.pages.slider.index');
     }
     public function loadCreate()
@@ -26,7 +26,7 @@ class SLideController extends Controller
     }
     public function create(Request $r)
     {
-        $slide=new Slider();
+        $slide = new Slider();
 
         if($r->has('file_upload')){
             $file=$r->file_upload;
@@ -48,12 +48,12 @@ class SLideController extends Controller
     public function loadEdit($id)
     {
         var_dump($id);
-        $slide=Slider::find($id);
+        $slide = Slider::find($id);
         return view('admin.pages.slider.edit',['slide'=>$slide]);
     }
     public function edit(Request $request)
     {
-        $slide=Slider::find($request->id);
+        $slide = Slider::find($request->id);
 
         if($request->file_upload==''){
             $image=$request->input('image1');
@@ -65,7 +65,7 @@ class SLideController extends Controller
             $image=$file_name;
         }
 
-       $slide->name=$request->name;
+        $slide->name=$request->name;
         $slide->image=$image;
         $slide->slide_status=$request->slide_status;
         $slide->slide_desc=$request->slide_desc;
@@ -76,8 +76,8 @@ class SLideController extends Controller
     }
     public function delete($id)
     {
-        $slide=Slider::find($id);
-        $slide->delete($id);
+        $slide = Slider::find($id);
+        $slide -> delete($id);
         return redirect(route('listSlide'));
     }
     public function unactive($id){

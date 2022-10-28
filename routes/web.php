@@ -39,6 +39,7 @@ Route::prefix('/')->group(function () {
     Route::get('wishlist', [ClientController::class,'wishlist'])->name('listWish');
     Route::get('/add/{id}', [ClientController::class,'add'])->name('addWish');
     Route::get('delete/{id}', [ClientController::class,'delete'])->name('deleteWish');
+    Route::get('wishcount', [ClientController::class,'showcount'])->name('wishlistcount');
 });
 Route::get('/checkout', function () {
     return view('client/checkout');

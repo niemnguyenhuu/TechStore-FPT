@@ -93,23 +93,4 @@
   </div>
 </section>
       <script src="{{ URL::asset('js/jquery-3.2.1.min.js')}}"></script>
-      <script type="text/javascript">
-        $(document).ready(function(){
-          
-          $('.addWish').click(function(){
-            var products_id=$(this).data('products_id');
-            $.ajax({
-              url: '/addWish',
-              type: 'POST',
-              data:{
-                products_id, products_id,
-                user_id = user_id,
-              },
-              success:function(response){
-                console.log(response);
-              }
-            })
-          });
-        });
-      </script> 
 @endsection

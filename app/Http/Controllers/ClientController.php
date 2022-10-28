@@ -10,6 +10,7 @@ use App\Models\Comments;
 use App\Models\Slider;
 use App\Models\Wishlist;
 use DB;
+use Sesstion;
 use Illuminate\Support\Facades\Auth;
 
 class ClientController extends Controller
@@ -97,33 +98,32 @@ class ClientController extends Controller
     // Danh sách yêu thích
     public function wishlist()
     {
-        $wishlist=Wishlist::where('user_id','=', Auth::user()->id)->get();
+        $wishlist = Wishlist::where('user_id','=', Auth::user()->id)->get();
         return view('client.pages.wishlist', compact('wishlist'));
     }
-    public function add(Request $request) {
-        if(Auth::check())
-        {
-            if(Products::find($pro_id))
-            {
-                $wish = new Wishlist($pro_id);
-                $wish->pro_id = $pro_id;
-                $wish->user_id = Auth::id();
-                $wish->save;
-                return response()->json(['status'=>"Sản phẩm đã được thêm vào yêu thích"]);
-            }
-            else{
-                return response()->json(['status'=>"Sản phẩm không tồn tại "]);
-            }
+    public function add($pro_id) 
+    {
+        if(isset($wish)){
+            Sesstion::Flash('message', 'Them vao yeu thich thanh cong');
+            return view('listWish'); 
+        }else{
+            Wishlist::insert([
+                'user_id' => Auth::id(),
+                'pro_id' => $pro_id
+            ]);
         }
-        else{
-            return response()->json(['status'=>"Đăng nhập để tiếp tục"]);
-        }
+        return redirect(route('listWish'));
     }
     public function delete($id)
     {
         
-        $wishlist=Wishlist::find($id);
-        $wishlist->delete();
+        $wishlist = Wishlist::find($id);
+        $wishlist -> delete();
         return redirect(route('listWish'));
+    }
+    public function showcount($id)
+    {
+        $wishlistcount = Wishlist::count($id);
+        return view('client.pages',compact('wishlistcount'));
     }
 }
