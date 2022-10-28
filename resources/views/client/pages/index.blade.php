@@ -73,7 +73,6 @@
             <div class="col-lg-12">
                 <div class="main_title">
                     <h2><span>Sản phẩm nổi bật</span></h2>
-                    <p>Mang được gọi là hạt giống đầu tiên của thứ ba cho chính nó bây giờ đề cập</p>
                 </div>
             </div>
         </div>
@@ -101,9 +100,23 @@
                         </a>
                         <div class="mt-3">
                             <span class="mr-4">{{$pro->price}}</span>
-                            <del>{{$pro->discount}}</del>
+                            @if($pro->discount > 0)
+                                <del>{{$pro->discount}} đ</del>
+                            @endif
                         </div>
                     </div>
+                    @if($pro->hot == 1)
+                    <div class="product-top">
+                        <span class="product-top--text">HOT</span>
+                    </div>
+                    @endif
+                    @if($pro->discount != 0)
+                    <div class="product-item">
+                        <div class="product-item_sale">
+                            <div>Giảm giá</div>
+                        </div>
+                    </div>
+                    @endif
                 </div>
             </div>
             @endforeach
@@ -136,7 +149,6 @@
             <div class="col-lg-12">
                 <div class="main_title">
                     <h2><span>Sản phẩm mới</span></h2>
-                    <p>Mang được gọi là hạt giống đầu tiên của thứ ba cho chính nó bây giờ đề cập</p>
                 </div>
             </div>
         </div>
@@ -179,9 +191,24 @@
                                 </a>
                                 <div class="mt-3">
                                     <span class="mr-4">{{$homeNewPr[$i]->price}}</span>
-                                    <del>{{$homeNewPr[$i]->discount}}</del>
+                                    @if($homeNewPr[$i]->discount > 0)
+                                        <del>{{$homeNewPr[$i]->discount}}</del>
+                                    @endif
                                 </div>
                             </div>
+                            @if($homeNewPr[$i]->discount != 0)
+                            <div class="product-item">
+                                <div class="product-item_sale">
+                                    <div>Giảm giá</div>
+                                </div>
+                            </div>
+                            @endif
+
+                            @if($homeNewPr[$i]->hot == 1)
+                            <div class="product-top">
+                                <span class="product-top--text">HOT</span>
+                            </div>
+                            @endif
                         </div>
                     </div>
                     @endfor
@@ -199,7 +226,6 @@
             <div class="col-lg-12">
                 <div class="main_title">
                     <h2><span>Laptop khuyến mãi</span></h2>
-                    <p>Mang được gọi là hạt giống đầu tiên của thứ ba cho chính nó bây giờ đề cập</p>
                 </div>
             </div>
         </div>
@@ -228,9 +254,24 @@
                         </a>
                         <div class="mt-3">
                             <span class="mr-4">{{$pro->price}}</span>
-                            <del>{{$pro->discount}}</del>
+                            @if($pro->discount > 0)
+                                <del>{{$pro->discount}} đ</del>
+                            @endif
                         </div>
                     </div>
+                    @if($pro->discount != 0)
+                    <div class="product-item">
+                        <div class="product-item_sale">
+                            <div>Giảm giá</div>
+                        </div>
+                    </div>
+                    @endif 
+
+                    @if($pro->hot == 1)
+                    <div class="product-top">
+                        <span class="product-top--text">HOT</span>
+                    </div>
+                    @endif
                 </div>
             </div>
             @endforeach 
@@ -246,7 +287,6 @@
             <div class="col-lg-12">
                 <div class="main_title">
                     <h2><span>blog mới nhất</span></h2>
-                    <p>Mang được gọi là hạt giống đầu tiên của thứ ba cho chính nó bây giờ đề cập</p>
                 </div>
             </div>
         </div>
