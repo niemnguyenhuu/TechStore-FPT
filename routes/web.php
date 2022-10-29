@@ -9,11 +9,8 @@ use App\Http\Controllers\CateItemController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
-use Illuminate\Auth\Events\PasswordReset;
-use Illuminate\Http\Request;
-use Illuminate\Support\Facades\Hash;
-use Illuminate\Support\Facades\Password;
-use Illuminate\Support\Str;
+use App\Http\Controllers\DiscountsCodeController;
+
 
 
 Route::prefix('/')->group(function () {
