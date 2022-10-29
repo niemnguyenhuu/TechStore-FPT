@@ -178,7 +178,6 @@ class ProductController extends Controller
             $pro_var->hight=$r->hight;
             $pro_var->depth=$r->depth;
             $pro_var->weight=$r->weight;
-
             $pro_var->save();
         }
 

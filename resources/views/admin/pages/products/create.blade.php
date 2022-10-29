@@ -9,7 +9,7 @@
             <p class="card-description">
               Nhập thông tin
             </p>
-            <form method="POST" action="{{route('createVariant')}}" enctype="multipart/form-data" id="form-product" class="forms-sample">
+            <form method="POST" action="{{route('createPro')}}" enctype="multipart/form-data" id="form-product" class="forms-sample">
               @csrf
               <div class="form-group">
                 <label for="exampleInputName1">Tên Sản Phẩm</label>
