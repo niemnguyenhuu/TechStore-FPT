@@ -58,6 +58,12 @@
         </div>
       </li>
       <li class="nav-item">
+        <a class="nav-link" href="pages/icons/mdi.html">
+          <i class="fa fa-file menu-icon"></i>
+          <span class="menu-title">Đơn hàng</span>
+        </a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" href="documentation/documentation.html">
           <i class="mdi mdi-file-document-box-outline menu-icon"></i>
           <span class="menu-title">Documentation</span>

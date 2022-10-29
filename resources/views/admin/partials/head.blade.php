@@ -15,4 +15,5 @@
     <link rel="stylesheet" href="{{ URL::asset('admin/css/style.css')}}">
     <!-- endinject -->
     <link rel="shortcut icon" href="{{ URL::asset('images/favicon.png')}}" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   </head>
