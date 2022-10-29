@@ -19,7 +19,6 @@
   <link rel="stylesheet" href="{{ URL::asset('vendors/animate-css/animate.css')}}" />
   <link rel="stylesheet" href="{{ URL::asset('vendors/jquery-ui/jquery-ui.css')}}" />
   <!-- main css -->
-
   <link rel="stylesheet" href="{{ URL::asset('css/style.css')}}" />
 
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" />
