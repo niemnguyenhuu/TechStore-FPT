@@ -123,7 +123,7 @@ class ProductController extends Controller
         }
     }
 
-
+    
     public function createView()
     {
         $allCate=Categories::all();

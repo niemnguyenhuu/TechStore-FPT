@@ -91,11 +91,9 @@
                     <td><img src="{{asset('images/products/'.$pro->image)}}" alt="" style="width:100px; height:100px"></td>
                     <td>{{$pro->price}} VND</td>
                     <td>{{$pro->created_at}}</td>
-                    <td>
-                      <a class="badge badge-info rounded" href="{{route('showVariants',$pro->id)}}">Biến thể</a>
-                      <a class="badge badge-info rounded" href="{{route('loadEditPro',$pro->id)}}">Sửa</a>
-                      <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deletePro',$pro->id)}}">Xóa</a></td>
-                  </tr>
+                    <td><a class="badge badge-info rounded" href="{{route('loadEditPro',$pro->id)}}">Sửa</a>
+                    <a class="badge badge-danger rounded" onclick="return confirm('Xóa mục này?')" href="{{route('deletePro',$pro->id)}}">Xóa</a></td>
+                </tr>
                   @endforeach           
                 </tbody>
               </table>

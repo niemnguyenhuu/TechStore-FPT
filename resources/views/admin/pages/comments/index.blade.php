@@ -46,7 +46,7 @@
                         <select class="form-control show-cti form-select list"  name="keywords_date" id="cate" onchange="this.form.submit()" >
                           <option>Lọc theo ngày</option>
                           <option value="">Tất cả bình luận</option>
-                            @foreach ($allCom as $com)
+                            @foreach ($allCom1 as $com)
                               <option data-id="{{$com->created_at}}" value="{{$com->created_at}}">{{$com->created_at}}</option>
                             @endforeach
                         </select>
@@ -63,7 +63,7 @@
                 ?>
               </h5>
             </div>
-            
+
             <div class="table-responsive">
               <table id="recent-purchases-listing" class="table table-hover">
                 <thead>
