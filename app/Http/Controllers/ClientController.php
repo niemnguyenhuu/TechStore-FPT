@@ -22,8 +22,8 @@ class ClientController extends Controller
     public function index()
     {
         $homeTopPr = Products::where('hot','=','1')->limit(3)->get();
-        $homeNewPr = Products::orderBy('id','desc')->get();
-        $homeSalePr = Products::orderBy('discount','desc')->limit(6)->get();
+        $homeNewPr = Products::orderBy('id','desc')->limit(5)->get();
+        $homeSalePr = Products::orderBy('discount','desc')->limit(8)->get();
         return view('client.pages.index',['homeTopPr'=>$homeTopPr,'homeNewPr'=>$homeNewPr,'homeSalePr'=>$homeSalePr]);
     }
     public function contact()
