@@ -5,6 +5,18 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\CateItemController;
+<<<<<<< Updated upstream
+=======
+use Illuminate\Support\Facades\Auth;
+use App\Http\Controllers\CommentController;
+use App\Http\Controllers\UserController;
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
+
+>>>>>>> Stashed changes
 
 
 /*
@@ -27,6 +39,61 @@ Route::prefix('/')->group(function () {
     Route::get('/category/{id}',[ClientController::class,'getProByCate'])->name('getProByCate');
     Route::get('/cateitem/{id}',[ClientController::class,'getProByCateItem'])->name('getProByCateItem');
     Route::get('product/{id}',[ClientController::class,'getProById'])->name('getProById');
+<<<<<<< Updated upstream
+=======
+    Route::get('contact',[ClientController::class,'contact'] )->name('contact');
+    Route::get('signup',[ClientController::class,'signup'] )->name('signup');
+    Route::get('/forgot-password', function () {
+        return view('auth.forgot-password');
+    })->middleware('guest')->name('password.request');
+    Route::post('/forgot-password', function (Request $request) {
+        $request->validate(['email' => 'required|email']);
+     
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+     
+        return $status === Password::RESET_LINK_SENT
+                    ? back()->with(['status' => __($status)])
+                    : back()->withErrors(['email' => __($status)]);
+    })->middleware('guest')->name('password.email');
+    Route::get('/reset-password/{token}', function ($token) {
+        return view('auth.reset-password', ['token' => $token]);
+    })->middleware('guest')->name('password.reset');
+    Route::post('/reset-password', function (Request $request) {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+     
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+     
+                $user->save();
+     
+                event(new PasswordReset($user));
+            }
+        );
+     
+        return $status === Password::PASSWORD_RESET
+                    ? redirect()->route('login')->with('status', __($status))
+                    : back()->withErrors(['email' => [__($status)]]);
+    })->middleware('guest')->name('password.update');
+    Route::get('forgotpassword',[ClientController::class,'forgotpassword'] )->name('forgotpassword');
+    Route::get('manager',[ClientController::class,'manager'] )->name('manager');
+
+
+    Route::get('edit_profile',[UserController::class,'edit_profile'] )->name('edit_profile');
+    Route::post('updateAccount',[UserController::class,'updateAccount'] )->name('updateAccount');
+
+    Route::get('/search',[ClientController::class,'search'] )->name('search');
+    Route::post('/product/comment/{id}',[ClientController::class,'store'])->name('store');
+>>>>>>> Stashed changes
 });
 Route::get('/checkout', function () {
     return view('client/checkout');

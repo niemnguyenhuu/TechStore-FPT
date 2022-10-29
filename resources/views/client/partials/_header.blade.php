@@ -25,7 +25,24 @@
                     <a href="contact.html">
                     Liên Hệ
                     </a>
+<<<<<<< Updated upstream
                 </li>
+=======
+    
+            </li>
+            @if (Auth::check()) 
+            <li>
+                <a href="">{{Auth::user()->name}}</a>
+            </li>
+            @else
+            <li>
+                <a href="{{Route('signup')}}">
+                    Đăng Ký
+                </a>
+            </li>
+            @endif
+            </ul>
+>>>>>>> Stashed changes
                 </ul>
             </div>
             </div>
@@ -49,6 +66,7 @@
             <div class="collapse navbar-collapse offset w-100" id="navbarSupportedContent">
             <div class="row w-100 mr-0">
                 <div class="col-lg-7 pr-0">
+<<<<<<< Updated upstream
                 <ul class="nav navbar-nav center_nav pull-right">
                     @foreach ($allCate as $cate)
                     <li class="nav-item submenu dropdown">
@@ -68,14 +86,42 @@
                     <a class="nav-link" href="contact.html">Contact</a>
                     </li>
                 </ul>
+=======
+
+>>>>>>> Stashed changes
                 </div>
     
                 <div class="col-lg-5 pr-0">
                 <ul class="nav navbar-nav navbar-right right_nav pull-right">
+<<<<<<< Updated upstream
                     <li class="nav-item">
                     <a href="#" class="icons">
                         <i class="ti-search" aria-hidden="true"></i>
                     </a>
+=======
+                    <style>
+                        .has-search .form-control {
+                            
+                        }
+                    </style>
+                    <!-- search ân -->
+                        <div style="float: left; width: 66%; height:10px;" class="collapse" id="collapseExample">
+                            <div style=" border: none; padding: 1.05rem;" class="card card-body" >
+                                <!-- code -->
+                                <form action="{{url('search')}}" method="GET">
+                                    @csrf
+                                    <div class="input-group">
+                                        <input style="margin-top: 2%;" name="keywords" type="search" class="form-control" placeholder="Nhập từ khóa..">
+                                    </div>
+                                </form>
+    
+                            </div>
+                        </div>
+                    <li class="nav-item"  role="presentation">
+                        <a style="border: none; width: 100%; height: 100%; margin: 15% 0% 0% 0%; " class="icons" data-toggle="collapse" href="#collapseExample" role="right" aria-expanded="false" aria-controls="collapseExample">
+                            <i class="ti-search" aria-hidden="true"></i>
+                        </a>
+>>>>>>> Stashed changes
                     </li>
     
                     <li class="nav-item">
@@ -83,7 +129,25 @@
                         <i class="ti-shopping-cart"></i>
                     </a>
                     </li>
+<<<<<<< Updated upstream
     
+=======
+                    @if (Auth::check())
+                    <li class="nav-item dropdown">
+                        <a href="#" class="icons dropdown-toggle" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="ti-user" aria-hidden="true"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                            <a class="dropdown-item" href="manager"><i class="fa fa-info" aria-hidden="true"></i>   Quản lý tài khoản</a>
+                            <form action="/logout" method="post">
+                                @csrf
+                                <button class="dropdown-item btn-none"><i class="fa fa-sign-out" aria-hidden="true"></i>
+                                    Đăng xuất</button>
+                            </form>
+                          </div>
+                    </li>    
+                    @else
+>>>>>>> Stashed changes
                     <li class="nav-item">
                     <a href="#" class="icons" data-toggle="modal" data-target="#myModal">
                         <i class="ti-user" aria-hidden="true"></i>
@@ -105,6 +169,7 @@
                                       <label for="exampleInputEmail1">Tài khoản</label>
                                       <input type="text" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập tài khoản">
                                     </div>
+<<<<<<< Updated upstream
                                     <div class="form-group">
                                       <label for="exampleInputPassword1">Mật khẩu</label>
                                       <input type="password" class="form-control" id="exampleInputPassword1" placeholder="Nhập mật khẩu">
@@ -116,6 +181,26 @@
                                     <button type="submit" class=" b-submit">Đăng nhập</button>
                                     
                                   </form>                        
+=======
+                                <div class="modal-body">
+                                    <form action="{{ route('login') }}" method="POST">
+                                        @csrf
+                                        <div class="form-group">
+                                        <label for="exampleInputEmail1">Tài khoản</label>
+                                        <input type="text" class="form-control" name="email" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Nhập Email của bạn">
+                                        </div>
+                                        <div class="form-group">
+                                        <label for="exampleInputPassword1">Mật khẩu</label>
+                                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Nhập mật khẩu">
+                                        </div>
+                                        <div class="form-check align-items-center">
+                                        <input type="checkbox" name="remember" class="form-check-input" id="exampleCheck1">
+                                        <label class="form-check-label my-1" for="exampleCheck1">Lưu thông tin</label>
+                                        </div>
+                                        <button type="submit" class="my-4 btn btn-lg btn-block btn-form">Đăng nhập</button>
+                                        
+                                    </form>                        
+>>>>>>> Stashed changes
                                 </div>
                               <div class="modal-footer">
                                 <p class="m-0">Bạn chưa có tài khoản ? <a href="/register"  data-toggle="modal" data-target="#myModal">Đăng ký</a></p>
@@ -141,4 +226,8 @@
         </nav>
         </div>
     </div>
+<<<<<<< Updated upstream
     </header>
+=======
+</header>
+>>>>>>> Stashed changes
