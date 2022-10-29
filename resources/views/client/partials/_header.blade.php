@@ -62,7 +62,7 @@
             <!-- Collect the nav links, forms, and other content for toggling -->
             <div class="collapse navbar-collapse offset w-100" id="navbarSupportedContent">
             <div class="row w-100 mr-0">
-                <div class="col-lg-7 pr-0">
+                <div class="col-lg-5 pr-0">
                 <ul class="nav navbar-nav center_nav pull-right">
                     @foreach ($allCate as $cate)
                     <li class="nav-item submenu dropdown">
@@ -81,7 +81,7 @@
                 </ul>
                 </div>
     
-                <div class="col-lg-5 pr-0">
+                <div class="col-lg-7 pr-0">
                 <ul class="nav navbar-nav navbar-right right_nav pull-right">
                     <style>
                         .has-search .form-control {
