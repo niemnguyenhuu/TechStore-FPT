@@ -9,6 +9,8 @@ use App\Models\Products;
 use App\Models\Comments;
 use App\Models\User;
 use DB;
+use Illuminate\Support\Facades\Auth;
+
 
 class UserController extends Controller
 {
@@ -170,7 +172,38 @@ class UserController extends Controller
         toastr()->success('Thành công', 'Cập nhật tài khoản thành công');
         return redirect(route('listUser'));
     }
-
+    // update client
+    public function edit_profile()
+    {
+        return view('client.pages.edit_profile');
+    }
+    public function updateAccount(Request $request)
+    {
+      $id = Auth::user()->id;
+      $user = User::find($id);
+      if($request->file_upload==''){
+          $image=$request->input('image1');
+      }
+      else if($request->has('file_upload')){
+          $file=$request->file_upload;
+          $file_name= $file->getClientoriginalName();
+          $file->move(public_path('images/users'),$file_name);
+          $image=$file_name;
+      }
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->password = $request->password;
+      $user->image = $image;
+      $user->address = $request->address;
+      $user->phone = $request->phone;
+      $user->status = $request->status;
+      $user->role = $request->role;
+      $user->save();
+      toastr()->success('Thành công', 'Cập nhật tài khoản thành công');
+      return redirect(route('manager'));
+      // return view('client.pages.manager');
+    }
+    // end update client
     /**
      * Remove the specified resource from storage.
      *
