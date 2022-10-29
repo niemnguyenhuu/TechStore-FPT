@@ -29,11 +29,11 @@
                       <?php
                        if($slide->slide_status==1){
                         ?>
-                        <a href="{{route('off', $slide->id)}}">OFF<span class="fa fa-heart"></span></a>
+                        <a href="{{route('off', $slide->id)}}">OFF<span class="fa fa-eye-slash"></span></a>
                         <?php
                          }else{
                         ?>  
-                         <a href="{{route('on', $slide->id)}}">ON<span class="fa fa-heart"></span></a>
+                         <a href="{{route('on', $slide->id)}}">ON<span class="fa fa-eye"></span></a>
                         <?php
                        }
                       ?>

@@ -93,9 +93,6 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('unactive/{id}', [SLideController::class,'unactive'])->name('off');
         Route::get('active/{id}', [SLideController::class,'active'])->name('on');
     });
-    Route::prefix('order')->group(function () {
-        Route::get('index',[OrderController::class,'index'])->name('listOrder');
-    });
 });
 Route::get('/dashboard', function () {
     return view('dashboard');

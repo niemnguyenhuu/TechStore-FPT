@@ -178,7 +178,9 @@
                         @endphp
                         <a href="{{route('listWish')}}" class="icons">
                             <i class="ti-heart" aria-hidden="true"></i>
-                            <span><a style="color:rgb(220, 22, 22);">{{$wishlistcount}}</a></span>
+                            <div class="shopee-cart-number-badge">
+                                <span style="display: block; line-height: normal; color: rgb(243, 235, 235);">{{$wishlistcount}}</span>
+                            </div>
                         </a>
                     </li>
                 </ul>
