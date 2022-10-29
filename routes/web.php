@@ -9,7 +9,11 @@ use App\Http\Controllers\CateItemController;
 use Illuminate\Support\Facades\Auth;
 use App\Http\Controllers\CommentController;
 use App\Http\Controllers\UserController;
-
+use Illuminate\Auth\Events\PasswordReset;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Hash;
+use Illuminate\Support\Facades\Password;
+use Illuminate\Support\Str;
 
 
 Route::prefix('/')->group(function () {
@@ -20,9 +24,54 @@ Route::prefix('/')->group(function () {
     Route::get('product/{id}',[ClientController::class,'getProById'])->name('getProById');
     Route::get('contact',[ClientController::class,'contact'] )->name('contact');
     Route::get('signup',[ClientController::class,'signup'] )->name('signup');
+    Route::get('/forgot-password', function () {
+        return view('auth.forgot-password');
+    })->middleware('guest')->name('password.request');
+    Route::post('/forgot-password', function (Request $request) {
+        $request->validate(['email' => 'required|email']);
+     
+        $status = Password::sendResetLink(
+            $request->only('email')
+        );
+     
+        return $status === Password::RESET_LINK_SENT
+                    ? back()->with(['status' => __($status)])
+                    : back()->withErrors(['email' => __($status)]);
+    })->middleware('guest')->name('password.email');
+    Route::get('/reset-password/{token}', function ($token) {
+        return view('auth.reset-password', ['token' => $token]);
+    })->middleware('guest')->name('password.reset');
+    Route::post('/reset-password', function (Request $request) {
+        $request->validate([
+            'token' => 'required',
+            'email' => 'required|email',
+            'password' => 'required|min:8|confirmed',
+        ]);
+     
+        $status = Password::reset(
+            $request->only('email', 'password', 'password_confirmation', 'token'),
+            function ($user, $password) {
+                $user->forceFill([
+                    'password' => Hash::make($password)
+                ])->setRememberToken(Str::random(60));
+     
+                $user->save();
+     
+                event(new PasswordReset($user));
+            }
+        );
+     
+        return $status === Password::PASSWORD_RESET
+                    ? redirect()->route('login')->with('status', __($status))
+                    : back()->withErrors(['email' => [__($status)]]);
+    })->middleware('guest')->name('password.update');
     Route::get('forgotpassword',[ClientController::class,'forgotpassword'] )->name('forgotpassword');
     Route::get('manager',[ClientController::class,'manager'] )->name('manager');
-    Route::get('edit_profile',[ClientController::class,'edit_profile'] )->name('edit_profile');
+
+
+    Route::get('edit_profile',[UserController::class,'edit_profile'] )->name('edit_profile');
+    Route::post('updateAccount',[UserController::class,'updateAccount'] )->name('updateAccount');
+
     Route::get('/search',[ClientController::class,'search'] )->name('search');
     Route::post('/product/comment/{id}',[ClientController::class,'store'])->name('store');
 
@@ -57,6 +106,11 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('index',[AdminController::class,'index'])->name('indexAdmin');
     Route::prefix('products')->group(function () {
         Route::get('index',[ProductController::class,'index'])->name('listPro');
+
+        Route::get('/index5',[ProductController::class,'index5'] )->name('search5');
+        Route::get('/index6',[ProductController::class,'index6'] )->name('search6');
+        Route::get('/index7',[ProductController::class,'index7'] )->name('search7');
+
         Route::get('create',[ProductController::class,'createView'])->name('loadCreatePro');
         Route::post('cateItems',[ProductController::class,'loadCateItem'])->name('loadCateItems');
         Route::post('create',[ProductController::class,'create'])->name('createPro');
@@ -69,6 +123,8 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         // Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
         Route::post('variant',[ProductController::class,'createVariant'])->name('createVariant');
         Route::get('deleteVar/{id}',[ProductController::class,'deleteVar'])->name('deleteVar');
+
+
     }); 
     Route::prefix('categories')->group(function () {
         Route::get('index', [CategoryController::class,'index'])->name('listCate');
@@ -100,6 +156,16 @@ Route::prefix('admin')->middleware('checkAdmin')->group(function () {
         Route::get('block/{id}',[UserController::class,'block'])->name('blockUser');
         Route::get('delete/{id}',[UserController::class,'destroy'])->name('deleteUser');
         Route::get('/index4',[UserController::class,'index4'] )->name('search4');
+        Route::get('/index6',[UserController::class,'index6'] )->name('search8');
+
+    });
+    Route::prefix('discounts')->group(function () {
+        Route::get('index',[DiscountsCodeController::class,'index'])->name('listDiscount');
+        Route::get('show',[DiscountsCodeController::class,'show'])->name('loadDiscount_code');
+        Route::post('store',[DiscountsCodeController::class,'store'])->name('storeDiscount_code');
+        Route::get('showid/{id}',[DiscountsCodeController::class,'showid'])->name('loadUpdateDiscount_code');
+        Route::post('update', [DiscountsCodeController::class,'update'])->name('updateDiscount_code');
+        Route::get('delete/{id}',[DiscountsCodeController::class,'destroy'])->name('deleteDiscount_code');
 
     });
 

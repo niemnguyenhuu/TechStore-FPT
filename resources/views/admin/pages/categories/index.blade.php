@@ -24,6 +24,11 @@
             </div>
             </div>
         </div>
+        <style>
+          .ttt{
+            height: 60px;
+          }
+        </style>
         <div class="col-lg-12 grid-margin stretch-card">
             <div class="card">
               <div class="card-body">
@@ -44,11 +49,10 @@
                         <th>
                           Hành động
                         </th>
-                        
                       </tr>
                     </thead>
                     <tbody>
-                      @foreach ($allCate as $cate)
+                      @foreach ($allCate as $key => $cate)
                       <tr>
                         <td>
                           {{$cate->id}}
@@ -57,14 +61,26 @@
                           <a href="{{route('getCateItems',$cate->id)}}">{{$cate->name}}</a>
                         </td>
                         <td>
-                          <div class="progress">
-                            <div class="progress-bar bg-success" role="progressbar" style="width: 50%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="20"></div>
+                          <?php 
+                            $a = App\Models\Products::where('cate_id','=',$cate->id)->select('id')->get();
+                            $count = count($a);
+                            $theoCte = (($count/$coutAllPro) * 100);
+                          ?>
+                          <div class="ldBar"
+                            style="width:100%;height:60px",
+                            data-stroke="data:ldbar/res,gradient(0,1,#9df,#9fd,#df9,#fd9)",
+                            data-path="M10 20Q20 15 30 20Q40 25 50 20Q60 15 70 20Q80 25 90 20",
+                            data-value="{{$theoCte}}">
                           </div>
+                          <br>
                         </td>
+                          
+
                         <td style="width: 15%">
                             <a href="{{route('loadEditCate',$cate->id)}}"><button type="button" class="btn btn-primary">Sửa</button></a>
                             <a href="{{route('deleteCate',$cate->id)}}" onclick="return confirm('Xóa mục này?')"><button type="button" class="btn btn-danger">Xóa</button></a>
                         </td>
+
                       </tr>
                       @endforeach
                       

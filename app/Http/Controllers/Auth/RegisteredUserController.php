@@ -48,6 +48,7 @@ class RegisteredUserController extends Controller
             $file->move(public_path('images/users'),$file_name);
         }
         $request->merge(['image'=>$file_name]);
+        
         $user = User::create([ 
             'name' => $request->name,
             'email' => $request->email,

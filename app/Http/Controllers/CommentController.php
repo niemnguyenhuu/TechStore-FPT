@@ -29,7 +29,8 @@ class CommentController extends Controller
     {
         $allPro=Products::all();
         $allUser=User::all();
-        return view('admin.pages.comments.index')->with(compact('allPro' , 'allUser'));
+        $allCom1 = Comments::all();
+        return view('admin.pages.comments.index')->with(compact('allPro' ,'allCom1', 'allUser'));
     }
 
     /**
@@ -43,12 +44,20 @@ class CommentController extends Controller
         $allPro=Products::all();
         $allUser=User::all();
         $allCom = Comments::where('pro_id','=', $keywords)->get();
+        $allCom1 = Comments::all();
         
-        if(count($allCom)==0){
-            $allCom=Comments::all();
-            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom', 'allUser'));
+        if(count($allCom)!=0){
+            $cate1 = Products::where('id','=', $keywords)->select('name')->get();
+            $sub1 = subStr($cate1, 10);
+            $str1 = strrev($sub1);
+            $sub2 = subStr($str1, 3);
+            $str2 = strrev($sub2);
+            $mess = 'Lọc theo tên: '.$str2.'.';
+            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom','allCom1', 'allUser','mess'));
         }else{
-            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom', 'allUser'));
+            $allCom=Comments::all();
+            $mess = 'Không tìm thấy kết quả!!!. Hiển thị tất cả bình luận.';
+            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom','allCom1', 'allUser', 'mess'));
         }
     }
 
@@ -63,14 +72,20 @@ class CommentController extends Controller
         $allPro=Products::all();
         $allUser=User::all();
         $allCom = Comments::where('user_id','=', $keywords)->get();
+        $allCom1 = Comments::all();
 
-        if(count($allCom)==0){
-            $allCom=Comments::all();
-            $MesSearch = 'Không tìm thấy kết quả của từ khóa: '.$keywords.'. Hiển thị danh sách sản phẩm:';
-            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom', 'allUser','MesSearch'));
+        if(count($allCom)!=0){
+            $cate1 = User::where('id','=', $keywords)->select('name')->get();
+            $sub1 = subStr($cate1, 10);
+            $str1 = strrev($sub1);
+            $sub2 = subStr($str1, 3);
+            $str2 = strrev($sub2);
+            $mess = 'Lọc theo tên: '.$str2.'.';
+            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom','allCom1', 'allUser','mess'));
         }else{
-            $MesSearch = 'Kết quả của từ khóa: '.$keywords.'.';
-            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom', 'allUser','MesSearch'));
+            $allCom=Comments::all();
+            $mess = 'Không tìm thấy kết quả!!!. Hiển thị tất cả bình luận.';
+            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom','allCom1', 'allUser','mess'));
         }
     }
 
@@ -84,15 +99,18 @@ class CommentController extends Controller
         $keywords = $_GET['keywords_date'];
         $allPro=Products::all();
         $allUser=User::all();
-        $allCom = Comments::where('pro_id','=', $keywords)->get();
+        $allCom1 = Comments::all();
+        $allCom = Comments::where('created_at','=', $keywords)->get();
+        
 
-        if(count($allCom)==0){
-            $allCom=Comments::all();
-            $MesSearch = 'Không tìm thấy kết quả của từ khóa: '.$keywords.'. Hiển thị danh sách sản phẩm:';
-            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom','allUser', 'MesSearch'));
+        if(count($allCom)!=0){
+            
+            $mess = 'Kết quả của từ khóa: '.$keywords.'.';
+            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom1', 'allCom', 'allUser', 'mess'));
         }else{
-            $MesSearch = 'Kết quả của từ khóa: '.$keywords.'.';
-            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom','allUser', 'MesSearch'));
+            $allCom=Comments::all();
+            $mess = 'Không tìm thấy kết quả của từ khóa: '.$keywords.'. Hiển thị danh sách sản phẩm:';
+            return view('admin.pages.comments.index')->with(compact('allPro', 'allCom1', 'allCom','allUser', 'mess'));
         }
     }
 

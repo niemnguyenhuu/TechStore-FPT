@@ -129,4 +129,10 @@ class ClientController extends Controller
 
         return redirect()->back();
     }
+    public function store1($id, Request $request)
+    {
+        $allusern = User::where('id', '=', )->get;
+        return redirect()->back();
+    }
+    
 }

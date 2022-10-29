@@ -10,6 +10,10 @@ use App\Models\Comments;
 use App\Models\User;
 use DB;
 use Illuminate\Support\Facades\Auth;
+<<<<<<< HEAD
+=======
+
+>>>>>>> 348652d4da00a91357df0b4be87267ddbef81da2
 
 class UserController extends Controller
 {
@@ -81,6 +85,25 @@ class UserController extends Controller
         $allPro=Products::all();
         $allUser=User::where('role', '=', 1)->get();
         return view('admin.pages.users.index1')->with(compact('allPro', 'allUser', 'allCom'));
+    }
+    public function index6()
+    {
+        //View client
+        $keywords = $_GET['keywords'];
+        $allCom=Comments::all();
+        $allPro=Products::all();
+        $allUser=User::when($keywords, function ($query, $keywords) {
+            $query->where('id','=', '%'.$keywords.'%')->orWhere('name','LIKE', '%'.$keywords.'%');
+        })->where('role', '=', 1)->get();
+
+        if((count($allUser)!=0)){
+            $message = 'Kết quả của: '.$keywords.'.';
+            return view('admin.pages.users.index1')->with(compact('allPro' , 'allUser', 'allCom','message'));
+        }
+        else{
+            $message = 'Không tìm thấy kết quả của: '.$keywords.'.';
+            return view('admin.pages.users.index1')->with(compact('allPro' , 'allUser', 'allCom','message'));
+        }
     }
 
 
@@ -181,7 +204,38 @@ class UserController extends Controller
         toastr()->success('Thành công', 'Cập nhật tài khoản thành công');
         return redirect(route('listUser'));
     }
-
+    // update client
+    public function edit_profile()
+    {
+        return view('client.pages.edit_profile');
+    }
+    public function updateAccount(Request $request)
+    {
+      $id = Auth::user()->id;
+      $user = User::find($id);
+      if($request->file_upload==''){
+          $image=$request->input('image1');
+      }
+      else if($request->has('file_upload')){
+          $file=$request->file_upload;
+          $file_name= $file->getClientoriginalName();
+          $file->move(public_path('images/users'),$file_name);
+          $image=$file_name;
+      }
+      $user->name = $request->name;
+      $user->email = $request->email;
+      $user->password = $request->password;
+      $user->image = $image;
+      $user->address = $request->address;
+      $user->phone = $request->phone;
+      $user->status = $request->status;
+      $user->role = $request->role;
+      $user->save();
+      toastr()->success('Thành công', 'Cập nhật tài khoản thành công');
+      return redirect(route('manager'));
+      // return view('client.pages.manager');
+    }
+    // end update client
     /**
      * Remove the specified resource from storage.
      *

@@ -10,7 +10,7 @@
             style="float: left;"
             >
             <!-- onchange="this.form.submit()" để submit -->
-              <form class="card-title" action="{{route('search1')}}" method="GET">
+              <form class="card-title" action="{{route('search1')}}" method="GET">  
                 @csrf
                 <div class="form-group">
                   <select class="form-control show-cti form-select list" name="keywords_pro_id" id="pro" onchange="this.form.submit()">
@@ -46,14 +46,24 @@
                         <select class="form-control show-cti form-select list"  name="keywords_date" id="cate" onchange="this.form.submit()" >
                           <option>Lọc theo ngày</option>
                           <option value="">Tất cả bình luận</option>
-                            @foreach ($allCom as $com)
+                            @foreach ($allCom1 as $com)
                               <option data-id="{{$com->created_at}}" value="{{$com->created_at}}">{{$com->created_at}}</option>
                             @endforeach
                         </select>
                     </div>
               </form>
             </div>
-            
+
+            <div class="row" style=" clear: both; color: red; margin-left: 1%;">
+              <h5>
+                <?php
+                  if(isset($mess)){
+                    echo $mess;
+                  }
+                ?>
+              </h5>
+            </div>
+
             <div class="table-responsive">
               <table id="recent-purchases-listing" class="table table-hover">
                 <thead>

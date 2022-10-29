@@ -17,9 +17,113 @@ class ProductController extends Controller
     }
     public function index()
     {
-        return view('admin.pages.products.index');
+        $allCate = CateItems::all();
+        $allPro = Products::all();
+        $allPro1=Products::all();
+
+        return view('admin.pages.products.index')->with(compact('allCate', 'allPro','allPro1'));
     }
 
+    public function index5()
+    {
+        $keyword = $_GET['keywords_cate_id'];
+        $allCate = CateItems::all();
+        $allPro = Products::where('cate_id','=', $keyword)->get();
+        $allPro1=Products::all();
+
+        if(count($allPro)==0){
+            $mess = 'Không tìm thấy kết quả!!!. Hiển thị tất cả sản phẩm.';
+            $allPro=Products::all();
+            return view('admin.pages.products.index')->with(compact('allCate', 'allPro', 'allPro1','mess'));
+        }else{
+            $cate1 = CateItems::where('id','=', $keyword)->select('name')->get();
+            $sub1 = subStr($cate1, 10);
+            $str1 = strrev($sub1);
+            $sub2 = subStr($str1, 3);
+            $str2 = strrev($sub2);
+            $mess = 'Lọc theo loại: '.$str2.'.';
+            return view('admin.pages.products.index')->with(compact('allCate', 'allPro', 'allPro1','mess','cate1'));
+        }
+    }
+    public function index6()
+    {
+        $keyword = $_GET['keywords_pro_name'];
+        $allCate = CateItems::all();
+        $allPro = Products::where('name','=', $keyword)->get();
+        $allPro1=Products::all();
+
+        if(count($allPro)==0){
+            $mess = 'Không tìm thấy kết quả!!!. Hiển thị tất cả sản phẩm.';
+            $allPro=Products::all();
+            return view('admin.pages.products.index')->with(compact('allCate', 'allPro', 'allPro1','mess'));
+        }else{
+            $mess = 'Lọc theo tên: '.$keyword.'.';
+            return view('admin.pages.products.index')->with(compact('allCate', 'allPro', 'allPro1','mess'));
+        }
+    }
+
+    public function index7()
+    {
+        $keyword = $_GET['keywords_price'];
+        $allPro=Products::all();
+        $allCate = CateItems::all();
+        $allPro1=Products::all();
+
+        if($keyword==0){
+            $mess = 'Tất cả sản phẩm';
+            $allPro=Products::all();
+            return view('admin.pages.products.index')->with(compact('allCate', 'allPro', 'allPro1','mess'));
+        }
+        else if($keyword==1){
+            $mess = 'Sản phẩm giá dưới 1tr';
+            $allPro=Products::where('price','<', 1000000)->get();
+            return view('admin.pages.products.index')->with(compact('allCate', 'allPro', 'allPro1', 'mess'));
+        }
+        else if($keyword==2){
+            $mess = 'Sản phẩm giá từ 1tr đến 2tr';
+            $allPro=Products::whereBetween('price',[1999900, 2000000])->get();
+
+            return view('admin.pages.products.index')->with(compact('allCate', 'allPro', 'allPro1', 'mess'));
+        }
+        else if($keyword==3){
+            $mess = 'Sản phẩm giá từ 2tr đến 4tr';
+            $allPro=Products::whereBetween('price',[2999900, 4000000])->get();
+
+            return view('admin.pages.products.index')->with(compact('allCate', 'allPro', 'allPro1', 'mess'));
+        }
+        else if($keyword==4){
+            $mess = 'Sản phẩm giá từ 4tr đến 7tr';
+            $allPro=Products::whereBetween('price',[4999900, 7000000])->get();
+
+            return view('admin.pages.products.index')->with(compact('allCate', 'allPro', 'allPro1', 'mess'));
+        }
+        else if($keyword==5){
+            $mess = 'Sản phẩm giá từ 7tr đến 10tr';
+            $allPro=Products::whereBetween('price',[7999900, 10000000])->get();
+
+            return view('admin.pages.products.index')->with(compact('allCate', 'allPro', 'allPro1', 'mess'));
+        }
+        else if($keyword==6){
+            $mess = 'Sản phẩm giá từ 10tr đến 15tr';
+            $allPro=Products::whereBetween('price',[99999900, 15000000])->get();
+
+            return view('admin.pages.products.index')->with(compact('allCate', 'allPro', 'allPro1', 'mess'));
+        }
+        else if($keyword==7){
+            $mess = 'Sản phẩm giá từ 15tr đến 20tr';
+            $allPro=Products::whereBetween('price',[14999900, 20000000])->get();
+
+            return view('admin.pages.products.index')->with(compact('allCate', 'allPro', 'allPro1', 'mess'));
+        }
+        else if($keyword==8){
+            $mess = 'Sản phẩm giá trên 20tr';
+            $allPro=Products::where('price','>',20000000)->get();
+
+            return view('admin.pages.products.index')->with(compact('allCate', 'allPro', 'allPro1', 'mess'));
+        }
+    }
+
+    
     public function createView()
     {
         $allCate=Categories::all();
@@ -74,7 +178,6 @@ class ProductController extends Controller
             $pro_var->hight=$r->hight;
             $pro_var->depth=$r->depth;
             $pro_var->weight=$r->weight;
-
             $pro_var->save();
         }
 
