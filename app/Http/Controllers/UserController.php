@@ -1,7 +1,6 @@
 <?php
 
 namespace App\Http\Controllers;
-
 use Illuminate\Http\Request;
 use App\Models\CateItems;
 use App\Models\Categories;
@@ -10,15 +9,13 @@ use App\Models\Comments;
 use App\Models\User;
 use DB;
 use Illuminate\Support\Facades\Auth;
-<<<<<<< HEAD
-=======
-
->>>>>>> 348652d4da00a91357df0b4be87267ddbef81da2
 
 class UserController extends Controller
 {
     public function __construct()
     {
+        $allCate=Categories::all();
+        view()->share('allCate', $allCate);
         $allUser=User::all();
         view()->share('allUser', $allUser);
     }
